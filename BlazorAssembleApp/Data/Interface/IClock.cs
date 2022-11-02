@@ -1,4 +1,4 @@
-﻿namespace BlazorAssembleApp.Data;
+﻿namespace BlazorAssembleApp.Data.Interface;
 
 public interface IClock
 {

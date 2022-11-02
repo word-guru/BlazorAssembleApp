@@ -1,7 +1,7 @@
 using BlazorAssembleApp.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebApplicationEF.Models;
+using WebApplicationEF.Date;
 
 var builder = WebApplication.CreateBuilder(args);
 var dbPath = "myapp.db";

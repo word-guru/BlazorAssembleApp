@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using BlazorAssembleApp;
 using BlazorAssembleApp.Data;
+using BlazorAssembleApp.Data.Interface;
 using Blazored.Toast;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);

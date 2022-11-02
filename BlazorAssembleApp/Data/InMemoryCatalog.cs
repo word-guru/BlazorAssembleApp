@@ -1,4 +1,6 @@
-﻿namespace BlazorAssembleApp.Data;
+﻿using BlazorAssembleApp.Data.Interface;
+
+namespace BlazorAssembleApp.Data;
 
 public class InMemoryCatalog : ICatalog
 {
