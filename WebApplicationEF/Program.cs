@@ -42,13 +42,17 @@ app.MapGet("/get_products", ([FromServices] AppDbContext dbContext) =>
 
 app.MapPost("/update_product",
         async ([FromServices] AppDbContext dbContext,
-            [FromQuery] long id, string name, decimal price) =>
+            [FromQuery] long id,[FromBody]Product newProduct) =>
         {
-            var product = await dbContext.Products.FirstAsync(it => it.Id == id);
-            product.Name = name;
-            product.Price = price;
-            dbContext.Products.Update(product);
+            var product = await dbContext.Products.FirstOrDefaultAsync(it => it.Id == id);
+            if (product is null)
+            {
+                return Results.NotFound(new {message = "Товар не найден"});
+            }
+            product.Name = newProduct.Name;
+            product.Price = newProduct.Price;
             await dbContext.SaveChangesAsync();
+            return Results.Ok();
         })
     .WithDisplayName("Обновляет товар");
 
@@ -56,7 +60,13 @@ app.MapGet("/get_product",
         async ([FromServices] AppDbContext dbContext,
             [FromQuery] long id) =>
         {
-            return await dbContext.Products.FirstOrDefaultAsync(p => p.Id == id);
+            var product = await dbContext.Products.FirstOrDefaultAsync(p => p.Id == id);
+            if (product is null)
+            {
+                return Results.NotFound(new {message = "Товар не найден"});
+            }
+
+            return Results.Ok(product);
         })
     .WithDisplayName("Получает товар по id");
 
@@ -65,8 +75,14 @@ app.MapPost("/delete_product",
             [FromQuery] long id) =>
         {
             var product = await dbContext.Products.FirstAsync(it => it.Id == id);
+            if (product is null)
+            {
+                return Results.NotFound(new {message = "Товар не найден"});
+            }
             dbContext.Products.Remove(product!);
             await dbContext.SaveChangesAsync();
+            
+            return Results.Ok();
         })
     .WithDisplayName("Удаляет товар");
 
