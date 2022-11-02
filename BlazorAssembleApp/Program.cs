@@ -12,6 +12,6 @@ builder.Services.AddScoped(sp => new HttpClient {BaseAddress = new Uri(builder.H
 builder.Services.AddScoped<ICatalog, InMemoryCatalog>();
 builder.Services.AddScoped<IClock, Clock>();
 builder.Services.AddScoped<ICart, ShopingCart>();
-builder.Services.AddBlazoredToast();
+builder.Services.AddBlazoredToast(); 
 
 await builder.Build().RunAsync();

@@ -44,7 +44,7 @@ app.MapPost("/update_product",
         async ([FromServices] AppDbContext dbContext,
             [FromQuery] long id, string name, decimal price) =>
         {
-            var product = await dbContext.Products.FindAsync(id);
+            var product = await dbContext.Products.FirstAsync(it => it.Id == id);
             product.Name = name;
             product.Price = price;
             dbContext.Products.Update(product);
@@ -62,9 +62,9 @@ app.MapGet("/get_product",
 
 app.MapPost("/delete_product",
         async ([FromServices] AppDbContext dbContext,
-            [FromQuery] long productId) =>
+            [FromQuery] long id) =>
         {
-            var product = await dbContext.Products.FindAsync(productId);
+            var product = await dbContext.Products.FirstAsync(it => it.Id == id);
             dbContext.Products.Remove(product!);
             await dbContext.SaveChangesAsync();
         })
