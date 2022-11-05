@@ -3,13 +3,13 @@ using MyShopBlazor.App.Data;
 
 namespace MyShopBlazor.HttpApiClient;
 
-public class MyStoreClient<Product>
+public class ShopClient : IShopClient
 {
-    private const string DefaultHost = "https://api.mysite.com";
+    private const string DefaultHost = "https://api.mysite.com/";
     private readonly string _host;
     private readonly HttpClient _httpClient;
     
-    public MyStoreClient(string host = DefaultHost, HttpClient? httpClient = null)
+    public ShopClient(string host = DefaultHost, HttpClient? httpClient = null)
     {
         _host = host;
         _httpClient = httpClient ?? new HttpClient();
