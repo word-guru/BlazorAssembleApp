@@ -1,0 +1,35 @@
+﻿@page "/Catalog"
+@using Blazored.Toast.Services
+@using MyShopBlazor.App.Data.Interface
+
+@inject ICatalog Catalog
+@inject ICart Cart
+@inject IJSRuntime JS
+
+<h3>Список товаров</h3>
+
+@foreach (var product in Catalog.GetProducts())
+{
+    <div>
+        <p>
+        @product.Name (цена: @product.Price)
+        <button name="@product.Id"
+                @onclick="@(() => Cart.AddingToCart(product))"
+                class="btn-primary"
+                type="submit">
+            Купить
+        </button>
+        </p>
+    </div>
+}
+
+@code
+{
+    private void SubmitToCart(Product product)
+    {
+
+        Cart.AddingToCart(product);
+        JS.InvokeVoidAsync("show_message", args: "Товар добавлен в корзину!");
+    }
+
+}

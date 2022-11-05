@@ -1,0 +1,40 @@
+﻿@page "/ProductAdding"
+@using Microsoft.AspNetCore.Components.Web.Infrastructure
+@using System.ComponentModel.DataAnnotations
+@using MyShopBlazor.App.Data.Interface
+
+@inject ICatalog Catalog
+@inject IJSRuntime JS
+
+<h3>Добавление товара в каталог</h3>
+
+<EditForm Model="_model" OnValidSubmit="SubmitProduct">
+    <DataAnnotationsValidator />
+    Название: <InputText class="form-control" @bind-Value="_model.Name"></InputText> <br/>
+    Цена: <InputNumber class="form-control" @bind-Value="_model.Price"></InputNumber>
+    <br/> <input class="btn btn-primary" type="submit" value="Добавить">
+    <ValidationSummary />
+</EditForm>
+
+@code {
+
+    private readonly ProductAddingModel _model = new();
+
+    private class ProductAddingModel
+    {
+        [Required, MinLength(3)]
+        public string? Name { get; set; }
+        [Required]
+
+        public decimal Price { get; set; }
+    }
+
+    private void SubmitProduct()
+    {
+        var id = Catalog.GetProducts().Max(it => it.Id);
+        var product = new Product(++id, _model.Name, _model.Price);
+        Catalog.AddProduct(product);
+        JS.InvokeVoidAsync("show_message", args: "Товар добавлен");
+    }
+
+}

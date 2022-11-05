@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShopBlazor.App", "MyShopBlazor.App\MyShopBlazor.App.csproj", "{3482667C-9DCE-40A0-AAB8-81DB1FDF1671}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShopBlazor.DbContext", "MyShopBlazor.DbContext\MyShopBlazor.DbContext.csproj", "{545ED99E-5953-4BA1-8E3C-7D581B08C000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShopBlazor.HttpApiClient", "MyShopBlazor.HttpApiClient\MyShopBlazor.HttpApiClient.csproj", "{68B30A44-B470-48C4-9FC4-C0A2EFC4ADE2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3482667C-9DCE-40A0-AAB8-81DB1FDF1671}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3482667C-9DCE-40A0-AAB8-81DB1FDF1671}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3482667C-9DCE-40A0-AAB8-81DB1FDF1671}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3482667C-9DCE-40A0-AAB8-81DB1FDF1671}.Release|Any CPU.Build.0 = Release|Any CPU
+		{545ED99E-5953-4BA1-8E3C-7D581B08C000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{545ED99E-5953-4BA1-8E3C-7D581B08C000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{545ED99E-5953-4BA1-8E3C-7D581B08C000}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{545ED99E-5953-4BA1-8E3C-7D581B08C000}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68B30A44-B470-48C4-9FC4-C0A2EFC4ADE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68B30A44-B470-48C4-9FC4-C0A2EFC4ADE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68B30A44-B470-48C4-9FC4-C0A2EFC4ADE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68B30A44-B470-48C4-9FC4-C0A2EFC4ADE2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

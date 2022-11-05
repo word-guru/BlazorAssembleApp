@@ -1,0 +1,19 @@
+﻿@page "/ShoppingCart"
+@using MyShopBlazor.App.Data.Interface
+
+@inject ICart Cart
+
+<h2>Корзина:</h2>
+
+@foreach (var product in Cart.GetCartContents())
+{
+    <p>
+            @product.Name @product.Price
+            <button @onclick="@(() => Cart.DeleteAnItem(product))" class="btn btn-primary">Удалить товар</button> 
+        </p>
+}
+
+
+<div>
+    <button @onclick="@(() => Cart.ClearAllBasket())" class="btn btn-primary">Очистить корзину</button>
+</div>
