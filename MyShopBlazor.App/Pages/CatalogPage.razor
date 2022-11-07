@@ -1,14 +1,16 @@
-﻿@page "/Catalog"
-@using Blazored.Toast.Services
+﻿@page "/catalog"
+@using MyShop.Models
 @using MyShopBlazor.App.Data.Interface
+@using MyShopBlazor.HttpApiClient
 
 @inject ICatalog Catalog
 @inject ICart Cart
 @inject IJSRuntime JS
+@inject IShopClient HttpClient
 
 <h3>Список товаров</h3>
 
-@foreach (var product in Catalog.GetProducts())
+@foreach (var product in ProductList)
 {
     <div>
         <p>
@@ -30,6 +32,15 @@
 
         Cart.AddingToCart(product);
         JS.InvokeVoidAsync("show_message", args: "Товар добавлен в корзину!");
+    }
+
+    private IEnumerable<Product> ProductList;
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        ProductList = await HttpClient.GetProducts();
+        
     }
 
 }

@@ -1,11 +1,11 @@
 ﻿using System.Net.Http.Json;
-using MyShopBlazor.App.Data;
+using MyShop.Models;
 
 namespace MyShopBlazor.HttpApiClient;
 
 public class ShopClient : IShopClient
 {
-    private const string DefaultHost = "https://api.mysite.com/";
+    private const string DefaultHost = $"https://localhost:7004";
     private readonly string _host;
     private readonly HttpClient _httpClient;
     
@@ -49,5 +49,16 @@ public class ShopClient : IShopClient
         var response = await _httpClient.PostAsync($"{uri}?productId={id}",null);
 
         response.EnsureSuccessStatusCode();
+    }
+    
+    public async Task UpdateProduct(Product product)
+    {
+        if (product == null)
+            throw new ArgumentNullException(nameof(product));
+        var uri = $"{_host}/update_product";
+        var response = await _httpClient.PutAsJsonAsync($"{uri}?productId={product.Id}",product);
+        
+        
+        
     }
 }

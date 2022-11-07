@@ -1,4 +1,4 @@
-﻿namespace MyShopBlazor.App.Data;
+﻿namespace MyShop.Models;
 
 public class Product
 {

@@ -1,4 +1,5 @@
-﻿using MyShopBlazor.App.Data.Interface;
+﻿using MyShop.Models;
+using MyShopBlazor.App.Data.Interface;
 
 namespace MyShopBlazor.App.Data;
 

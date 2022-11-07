@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MyShopBlazor.App.Data;
+using Microsoft.Net.Http.Headers;
+using MyShop.Models;
 using MyShopBlazor.DbContext.Date;
+using MyShopBlazor.HttpApiClient;
 
 var builder = WebApplication.CreateBuilder(args);
 var dbPath = "myapp.db";
@@ -14,8 +16,27 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseSqlite($"Data Source={dbPath}"));
+builder.Services.AddCors();
 
 var app = builder.Build();
+
+app.UseCors(policy =>
+{
+    policy
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .SetIsOriginAllowed(origin =>
+            origin is $"https://localhost:7004"
+                or $"https://mysite.ru"
+        )
+        .AllowCredentials();
+});
+/*app.UseCors(policy =>
+    policy.WithOrigins("http://localhost:7296, https://localhost:7296")
+        .AllowAnyMethod()
+        .WithHeaders(HeaderNames.ContentType)
+);*/
+
 app.MapGet("/Catalog", async (AppDbContext context) => await context.Products.ToListAsync());
 
 // Configure the HTTP request pipeline.

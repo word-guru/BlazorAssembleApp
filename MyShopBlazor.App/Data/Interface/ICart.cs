@@ -1,4 +1,6 @@
-﻿namespace MyShopBlazor.App.Data.Interface;
+﻿using MyShop.Models;
+
+namespace MyShopBlazor.App.Data.Interface;
 
 public interface ICart
 {

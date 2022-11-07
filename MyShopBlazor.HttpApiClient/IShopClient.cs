@@ -1,4 +1,4 @@
-﻿using MyShopBlazor.App.Data;
+﻿using MyShop.Models;
 
 namespace MyShopBlazor.HttpApiClient;
 

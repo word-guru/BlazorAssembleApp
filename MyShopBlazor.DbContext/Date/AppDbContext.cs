@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MyShopBlazor.App.Data;
+using MyShop.Models;
 
 namespace MyShopBlazor.DbContext.Date;
 
