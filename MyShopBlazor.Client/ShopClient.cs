@@ -1,7 +1,7 @@
 ﻿using System.Net.Http.Json;
 using MyShop.Models;
 
-namespace MyShopBlazor.HttpApiClient;
+namespace MyShopBlazor.Client;
 
 public class ShopClient : IShopClient
 {

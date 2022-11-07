@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShopBlazor.App", "MyShopB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShopBlazor.Server", "MyShopBlazor.Server\MyShopBlazor.Server.csproj", "{545ED99E-5953-4BA1-8E3C-7D581B08C000}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShopBlazor.HttpApiClient", "MyShopBlazor.HttpApiClient\MyShopBlazor.HttpApiClient.csproj", "{68B30A44-B470-48C4-9FC4-C0A2EFC4ADE2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShopBlazor.Client", "MyShopBlazor.Client\MyShopBlazor.Client.csproj", "{68B30A44-B470-48C4-9FC4-C0A2EFC4ADE2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShop.Models", "MyShop.Models\MyShop.Models.csproj", "{8E53FC35-9A49-4DA9-AB2B-B8443ED47808}"
 EndProject

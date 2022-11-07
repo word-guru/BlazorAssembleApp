@@ -15,7 +15,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\MyShop.Models\MyShop.Models.csproj" />
-      <ProjectReference Include="..\MyShopBlazor.HttpApiClient\MyShopBlazor.HttpApiClient.csproj" />
+      <ProjectReference Include="..\MyShopBlazor.Client\MyShopBlazor.Client.csproj" />
     </ItemGroup>
 
 </Project>

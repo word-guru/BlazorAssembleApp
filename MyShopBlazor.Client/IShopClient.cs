@@ -1,6 +1,6 @@
 ﻿using MyShop.Models;
 
-namespace MyShopBlazor.HttpApiClient;
+namespace MyShopBlazor.Client;
 
 public interface IShopClient
 {
