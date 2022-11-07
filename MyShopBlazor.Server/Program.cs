@@ -1,9 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Net.Http.Headers;
 using MyShop.Models;
-using MyShopBlazor.DbContext.Date;
-using MyShopBlazor.HttpApiClient;
+using MyShopBlazor.Server.Date;
 
 var builder = WebApplication.CreateBuilder(args);
 var dbPath = "myapp.db";
@@ -26,8 +24,8 @@ app.UseCors(policy =>
         .AllowAnyMethod()
         .AllowAnyHeader()
         .SetIsOriginAllowed(origin =>
-            origin is $"https://localhost:7004"
-                or $"https://mysite.ru"
+            origin is "https://localhost:7004" //7004 7203
+                or "https://mysite.ru"
         )
         .AllowCredentials();
 });

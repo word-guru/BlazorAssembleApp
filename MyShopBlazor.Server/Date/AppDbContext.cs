@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyShop.Models;
 
-namespace MyShopBlazor.DbContext.Date;
+namespace MyShopBlazor.Server.Date;
 
 public class AppDbContext : Microsoft.EntityFrameworkCore.DbContext
 {

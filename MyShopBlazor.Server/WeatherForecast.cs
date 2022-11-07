@@ -1,4 +1,4 @@
-namespace MyShopBlazor.DbContext;
+namespace MyShopBlazor.Server;
 
 public class WeatherForecast
 {

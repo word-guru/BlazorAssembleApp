@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace MyShopBlazor.DbContext.Controllers;
+namespace MyShopBlazor.Server.Controllers;
 
 [ApiController]
 [Route("[controller]")]

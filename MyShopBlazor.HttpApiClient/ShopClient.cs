@@ -5,7 +5,7 @@ namespace MyShopBlazor.HttpApiClient;
 
 public class ShopClient : IShopClient
 {
-    private const string DefaultHost = $"https://localhost:7004";
+    private const string DefaultHost = $"https://localhost:7203";
     private readonly string _host;
     private readonly HttpClient _httpClient;
     

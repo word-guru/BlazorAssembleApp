@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MyShopBlazor.DbContext.Date;
+using MyShopBlazor.Server.Date;
 
 #nullable disable
 
-namespace MyShopBlazor.DbContext.Migrations
+namespace MyShopBlazor.Server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20221102152421_InitialCreate")]

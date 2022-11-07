@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace MyShopBlazor.DbContext.Migrations
+namespace MyShopBlazor.Server.Migrations
 {
     public partial class InitialCreate : Migration
     {

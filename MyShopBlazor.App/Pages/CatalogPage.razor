@@ -10,19 +10,26 @@
 
 <h3>Список товаров</h3>
 
-@foreach (var product in ProductList)
+@if (ProductList != null)
 {
-    <div>
-        <p>
-        @product.Name (цена: @product.Price)
-        <button name="@product.Id"
-                @onclick="@(() => Cart.AddingToCart(product))"
-                class="btn-primary"
-                type="submit">
-            Купить
-        </button>
-        </p>
-    </div>
+    @foreach (var product in ProductList)
+    {
+        <div>
+            <p>
+                @product.Name (цена: @product.Price)
+                <button name="@product.Id"
+                        @onclick="@(() => Cart.AddingToCart(product))"
+                        class="btn-primary"
+                        type="submit">
+                    Купить
+                </button>
+            </p>
+        </div>
+    }
+}
+else
+{
+    <p>Load...</p>
 }
 
 @code
@@ -34,7 +41,7 @@
         JS.InvokeVoidAsync("show_message", args: "Товар добавлен в корзину!");
     }
 
-    private IEnumerable<Product> ProductList;
+    private IEnumerable<Product>? ProductList = null;
 
 
     protected async override Task OnInitializedAsync()

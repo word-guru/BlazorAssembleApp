@@ -11,10 +11,7 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-builder.Services.AddScoped(sp => new HttpClient
-{
-    BaseAddress = new Uri($"https://localhost:7004")
-});
+builder.Services.AddScoped<IShopClient, ShopClient>();//7004 7203
 
 builder.Services.AddScoped<ICatalog, InMemoryCatalog>();
 builder.Services.AddScoped<IClock, Clock>();
