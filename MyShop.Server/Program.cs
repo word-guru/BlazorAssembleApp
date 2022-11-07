@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyShop.Models;
 using MyShop.Server.Date;
+using MyShop.Server.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 var dbPath = "myapp.db";
@@ -15,6 +16,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseSqlite($"Data Source={dbPath}"));
 builder.Services.AddCors();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 var app = builder.Build();
 
@@ -35,7 +37,7 @@ app.UseCors(policy =>
         .WithHeaders(HeaderNames.ContentType)
 );*/
 
-app.MapGet("/Catalog", async (AppDbContext context) => await context.Products.ToListAsync());
+app.MapGet("/catalog", async (IProductRepository productRepository) => await productRepository.GetAll());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -46,16 +48,16 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapPost("/add_product", async ([FromBody]Product product, [FromServices]AppDbContext dbContext) =>
+app.MapPost("/add_product", async ([FromBody]Product product, [FromServices]IProductRepository productRepository) =>
     {
-        await dbContext.Products.AddAsync(product);
-        await dbContext.SaveChangesAsync();
+        await productRepository.Add(product);
+        //await dbContext.SaveChangesAsync();
     })
     .WithDisplayName("Добавляет товар");
 
-app.MapGet("/get_products", ([FromServices] AppDbContext dbContext) =>
+app.MapGet("/get_products", ([FromServices] IProductRepository productRepository) =>
     {
-        return dbContext.Products.ToListAsync();
+        return productRepository.GetAll();
     })
     .WithDisplayName("Получает товар");
 
@@ -76,10 +78,10 @@ app.MapPost("/update_product",
     .WithDisplayName("Обновляет товар");
 
 app.MapGet("/get_product",
-        async ([FromServices] AppDbContext dbContext,
+        async ([FromServices] IProductRepository productRepository,
             [FromQuery] long id) =>
         {
-            var product = await dbContext.Products.FirstOrDefaultAsync(p => p.Id == id);
+            var product = await  productRepository.GetById(id);
             if (product is null)
             {
                 return Results.NotFound(new {message = "Товар не найден"});
@@ -90,15 +92,15 @@ app.MapGet("/get_product",
     .WithDisplayName("Получает товар по id");
 
 app.MapPost("/delete_product",
-        async ([FromServices] AppDbContext dbContext,
+        async ([FromServices] AppDbContext dbContext,IProductRepository productRepository,
             [FromQuery] long id) =>
         {
-            var product = await dbContext.Products.FirstAsync(it => it.Id == id);
+            var product = await productRepository.GetById(id);
             if (product is null)
             {
                 return Results.NotFound(new {message = "Товар не найден"});
             }
-            dbContext.Products.Remove(product!);
+            productRepository.Delete(product!);
             await dbContext.SaveChangesAsync();
             
             return Results.Ok();
