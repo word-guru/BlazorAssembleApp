@@ -2,11 +2,13 @@
 @using MyShop.Models
 @using MyShop.App.Data.Interface
 @using MyShop.Client
+@using Blazored.Toast.Services
 
 @inject ICatalog Catalog
 @inject ICart Cart
 @inject IJSRuntime JS
-@inject IShopClient HttpClient
+@inject IShopClient Client
+@inject IToastService toastService
 
 <h3>Список товаров</h3>
 
@@ -18,8 +20,12 @@
             <p>
                 @product.Name (цена: @product.Price)
                 <button name="@product.Id"
-                        @onclick="@(() => Cart.AddingToCart(product))"
-                        class="btn-primary"
+                        class="btn btn-primary btn-success"
+                        @onclick="@(() => {
+                                              Cart.AddingToCart(product); 
+                                              toastService.ShowSuccess("Товар добавлен в корзину", "Выполнено");
+                                              
+                                  })"
                         type="submit">
                     Купить
                 </button>
@@ -36,7 +42,6 @@ else
 {
     private void SubmitToCart(Product product)
     {
-
         Cart.AddingToCart(product);
         JS.InvokeVoidAsync("show_message", args: "Товар добавлен в корзину!");
     }
@@ -46,8 +51,7 @@ else
 
     protected async override Task OnInitializedAsync()
     {
-        ProductList = await HttpClient.GetProducts();
-        
+        ProductList = await Client.GetProducts();
     }
 
 }

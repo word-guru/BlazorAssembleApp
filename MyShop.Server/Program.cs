@@ -48,64 +48,59 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapPost("/add_product", async ([FromBody]Product product, [FromServices]IProductRepository productRepository) =>
-    {
-        await productRepository.Add(product);
-        //await dbContext.SaveChangesAsync();
-    })
-    .WithDisplayName("Добавляет товар");
+app.MapPost("/add_product", async ([FromBody] Product product, [FromServices] IProductRepository productRepository) =>
+{
+    await productRepository.Add(product);
+    //await dbContext.SaveChangesAsync();
+});
 
 app.MapGet("/get_products", ([FromServices] IProductRepository productRepository) =>
-    {
-        return productRepository.GetAll();
-    })
-    .WithDisplayName("Получает товар");
+{
+    return productRepository.GetAll();
+});
 
-app.MapPost("/update_product",
-        async ([FromServices] AppDbContext dbContext,
-            [FromQuery] long id,[FromBody]Product newProduct) =>
+app.MapPut("/update_product",
+    async ([FromServices] IProductRepository productRepository,
+        [FromQuery] long id, [FromBody] Product newProduct) =>
+    {
+        var product = await productRepository.GetById(id);
+        if (product is null)
         {
-            var product = await dbContext.Products.FirstOrDefaultAsync(it => it.Id == id);
-            if (product is null)
-            {
-                return Results.NotFound(new {message = "Товар не найден"});
-            }
-            product.Name = newProduct.Name;
-            product.Price = newProduct.Price;
-            await dbContext.SaveChangesAsync();
-            return Results.Ok();
-        })
-    .WithDisplayName("Обновляет товар");
+            return Results.NotFound(new {message = "Товар не найден"});
+        }
+
+        product.Name = newProduct.Name;
+        product.Price = newProduct.Price;
+        return Results.Ok();
+    });
 
 app.MapGet("/get_product",
-        async ([FromServices] IProductRepository productRepository,
-            [FromQuery] long id) =>
+    async ([FromServices] IProductRepository productRepository,
+        [FromQuery] long id) =>
+    {
+        var product = await productRepository.GetById(id);
+        if (product is null)
         {
-            var product = await  productRepository.GetById(id);
-            if (product is null)
-            {
-                return Results.NotFound(new {message = "Товар не найден"});
-            }
+            return Results.NotFound(new {message = "Товар не найден"});
+        }
 
-            return Results.Ok(product);
-        })
-    .WithDisplayName("Получает товар по id");
+        return Results.Ok(product);
+    });
 
 app.MapPost("/delete_product",
-        async ([FromServices] AppDbContext dbContext,IProductRepository productRepository,
-            [FromQuery] long id) =>
+    async ([FromServices]IProductRepository productRepository,
+        [FromQuery] long id) =>
+    {
+        var product = await productRepository.GetById(id);
+        if (product is null)
         {
-            var product = await productRepository.GetById(id);
-            if (product is null)
-            {
-                return Results.NotFound(new {message = "Товар не найден"});
-            }
-            productRepository.Delete(product!);
-            await dbContext.SaveChangesAsync();
-            
-            return Results.Ok();
-        })
-    .WithDisplayName("Удаляет товар");
+            return Results.NotFound(new {message = "Товар не найден"});
+        }
+
+        productRepository.Delete(product!);
+
+        return Results.Ok();
+    });
 
 
 app.Run();

@@ -21,9 +21,10 @@ public class ProductRepository : IProductRepository
         return await _dbContext.Products.ToListAsync();
     }
 
-    public void Delete(Product product)
+    public async Task Delete(Product product)
     {
          _dbContext.Products.Remove(product);
+         await _dbContext.SaveChangesAsync();
     }
 
     public async Task Add(Product product)
@@ -36,4 +37,5 @@ public class ProductRepository : IProductRepository
         _dbContext.Entry(product).State = EntityState.Modified;
         await _dbContext.SaveChangesAsync();
     }
+    
 }
