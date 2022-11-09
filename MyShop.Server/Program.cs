@@ -48,7 +48,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapPost("/add_product", async ([FromBody] Product product, [FromServices] IProductRepository productRepository) =>
+app.MapPost("/add_product", async ([FromBody] Product product, 
+                                               [FromServices] IProductRepository productRepository) =>
 {
     await productRepository.Add(product);
     //await dbContext.SaveChangesAsync();
@@ -59,7 +60,7 @@ app.MapGet("/get_products", ([FromServices] IProductRepository productRepository
     return productRepository.GetAll();
 });
 
-app.MapPut("/update_product",
+app.MapPost("/update_product",
     async ([FromServices] IProductRepository productRepository,
         [FromQuery] long id, [FromBody] Product newProduct) =>
     {
