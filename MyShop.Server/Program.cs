@@ -37,7 +37,7 @@ app.UseCors(policy =>
         .WithHeaders(HeaderNames.ContentType)
 );*/
 
-app.MapGet("/catalog", async (IProductRepository productRepository) => await productRepository.GetAll());
+//app.MapGet("/catalog", async (IProductRepository productRepository) => await productRepository.GetAll());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -48,19 +48,19 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapPost("/add_product", async ([FromBody] Product product, 
+/*app.MapPost("/add_product", async ([FromBody] Product product, 
                                                [FromServices] IProductRepository productRepository) =>
 {
     await productRepository.Add(product);
     //await dbContext.SaveChangesAsync();
-});
+});*/
 
-app.MapGet("/get_products", ([FromServices] IProductRepository productRepository) =>
+/*app.MapGet("/get_products", ([FromServices] IProductRepository productRepository) =>
 {
     return productRepository.GetAll();
-});
+});*/
 
-app.MapPost("/update_product",
+/*app.MapPost("/update_product",
     async ([FromServices] IProductRepository productRepository,
         [FromQuery] long id, [FromBody] Product newProduct) =>
     {
@@ -73,9 +73,9 @@ app.MapPost("/update_product",
         product.Name = newProduct.Name;
         product.Price = newProduct.Price;
         return Results.Ok();
-    });
+    });*/
 
-app.MapGet("/get_product",
+/*app.MapGet("/get_product",
     async ([FromServices] IProductRepository productRepository,
         [FromQuery] long id) =>
     {
@@ -86,9 +86,9 @@ app.MapGet("/get_product",
         }
 
         return Results.Ok(product);
-    });
+    });*/
 
-app.MapPost("/delete_product",
+/*app.MapPost("/delete_product",
     async ([FromServices]IProductRepository productRepository,
         [FromQuery] long id) =>
     {
@@ -101,7 +101,7 @@ app.MapPost("/delete_product",
         productRepository.Delete(product!);
 
         return Results.Ok();
-    });
-
+    });*/
+app.MapControllers();
 
 app.Run();
