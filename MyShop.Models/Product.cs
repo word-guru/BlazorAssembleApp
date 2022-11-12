@@ -2,14 +2,26 @@
 
 public class Product
 {
-    public Product(long id, string name, decimal price)
+    public Product(
+        long              id, 
+        string            name, 
+        decimal           price, 
+        string            description, 
+        string            imageUrl, 
+        int               quantity, 
+        int               categoryId
+        )
     {
         Id = id;
         Name = name;
         Price = price;
+        Description = description;
+        ImageUrl = imageUrl;
+        Quantity = quantity;
+        CategoryId = categoryId;
     }
 
-    protected Product()
+   public Product()
     {
     }
 
