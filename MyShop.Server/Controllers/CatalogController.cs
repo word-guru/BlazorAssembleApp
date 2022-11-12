@@ -17,13 +17,13 @@ public class CatalogController : ControllerBase
     [HttpGet("get_products")] 
     public async Task<IEnumerable<Product>> GetProducts()
     {
-        return await _productRepository.GetAll();
+        return await _productRepository.GetAllProducts();
     }
 
     [HttpGet("get_product")]
     public async Task<Product?> GetProduct(long id)
     {
-        var product = await _productRepository.GetById(id);
+        var product = await _productRepository.GetProduct(id);
         if (product is null)
         {
             return null;
@@ -34,18 +34,15 @@ public class CatalogController : ControllerBase
     [HttpPost("add_product")]
     public async Task AddProducts(Product product)
     {
-        await _productRepository.Add(product);
+        await _productRepository.AddProduct(product);
     }
     
     [HttpPost("delete_product")]
     public async Task DeleteProduct(long id)
     {
-        var product = await _productRepository.GetById(id);
-        
+        var product = await _productRepository.GetProduct(id);
 
-        _productRepository.Delete(product!);
-
-      
+        _productRepository.DeleteProduct(product!);
     }
     
 }

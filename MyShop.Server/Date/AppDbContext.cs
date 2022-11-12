@@ -6,6 +6,10 @@ namespace MyShop.Server.Date;
 public class AppDbContext : DbContext
 {
     public DbSet<Product> Products => Set<Product>();
+    public DbSet<Cart> Carts => Set<Cart>();
+    public DbSet<Category> Categories => Set<Category>();
+    public DbSet<Authorization> Authorizations => Set<Authorization>();
+    
     public Task Product { get; set; }
 
     public AppDbContext(

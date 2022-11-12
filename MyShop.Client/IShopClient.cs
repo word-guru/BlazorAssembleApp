@@ -8,4 +8,7 @@ public interface IShopClient
     Task AddProduct(Product product);
     Task<Product> GetProduct(int id);
     Task DeleteProduct(int id);
+    Task<IReadOnlyList<Category>> GetCategories();
+    Task<IReadOnlyList<Cart>> GetCartItems();
+    Task AddToCart(Cart cartItem);
 }
