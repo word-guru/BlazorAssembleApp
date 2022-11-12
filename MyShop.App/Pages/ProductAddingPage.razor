@@ -4,7 +4,6 @@
 @using MyShop.App.Data.Interface
 @using MyShop.Client
 
-@inject ICatalog Catalog
 @inject IJSRuntime JS
 @inject IShopClient Client
 
@@ -33,9 +32,9 @@
 
     private void SubmitProduct()
     {
-        var id = Catalog.GetProducts().Max(it => it.Id);
-        var product = new Product(++id, _model.Name, _model.Price);
-        Client.AddProduct(product);
+       // var id = Catalog.GetProducts().Max(it => it.Id);
+       // var product = new Product(++id, _model.Name, _model.Price);
+        //Client.AddProduct(product);
         JS.InvokeVoidAsync("show_message", args: "Товар добавлен");
     }
 
