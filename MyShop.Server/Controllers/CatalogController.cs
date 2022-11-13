@@ -44,5 +44,5 @@ public class CatalogController : ControllerBase
 
         _productRepository.DeleteProduct(product!);
     }
-    
+
 }

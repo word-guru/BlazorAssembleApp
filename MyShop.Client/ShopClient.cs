@@ -72,8 +72,7 @@ public class ShopClient : IShopClient
         
         await _httpClient.PutAsJsonAsync($"{uri}?productId={product.Id}", product);
     }
-    
-    /* -------------------------  Categories  ---------------------------- */
+   
     public async Task<IReadOnlyList<Category>> GetCategories()
     {
         var uri = $"{_host}/{_controller}/get_categories";
@@ -82,24 +81,37 @@ public class ShopClient : IShopClient
         
         return response;
     }
-    
-/* ----------------------------  Cart  ------------------------------- */
+ 
     public async Task<IReadOnlyList<Cart>> GetCartItems()
     {
-        var uri = $"{_host}/{_controller}/get_carts";
+        var uri = $"{_host}/cart/get_carts";
         var response = await _httpClient
             .GetFromJsonAsync<IReadOnlyList<Cart>>(uri);
         
         return response;
     }
     
-    public async Task AddToCart(Cart cartItem)
+    public async Task AddToCart(Product product)
     {
-        if (cartItem is null)
+        if (product is null)
         {
-            throw new ArgumentNullException(nameof(cartItem));
+            throw new ArgumentNullException(nameof(product));
         }
-        var uri = $"{_host}/{_controller}/add_cart";
-        await _httpClient.PostAsJsonAsync(uri, cartItem);
+        var uri = $"{_host}/cart/add_cart";
+        await _httpClient.PostAsJsonAsync(uri, product);
+    }
+    public async Task DeleteCart(long id)
+    {
+        var uri = $"{_host}/cart/delete_cart";
+        var response = await _httpClient.PostAsync($"{uri}?cartId={id}", null);
+
+        response.EnsureSuccessStatusCode();
+    }
+    public async Task ClearCart()
+    {
+       // var uri = $"{_host}/cart/clear_cart";
+       // var response = await _httpClient.PostAsync();
+
+       // response.EnsureSuccessStatusCode();
     }
 }

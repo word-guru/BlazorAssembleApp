@@ -12,7 +12,5 @@ public interface IProductRepository
     public Task AddProduct(Product product);
     public Task UpdateProduct(Product product);
     Task<IEnumerable<Category>> GetCategories();
-    Task<IReadOnlyList<Cart>> GetCarts();
-    Task AddCart(Cart cart);
 
 }

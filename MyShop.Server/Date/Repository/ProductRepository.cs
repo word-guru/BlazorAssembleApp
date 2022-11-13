@@ -41,12 +41,5 @@ public class ProductRepository : IProductRepository
     public async Task<IEnumerable<Category>> GetCategories()
         => await _dbContext.Categories.ToListAsync();
     
-    public async Task<IReadOnlyList<Cart>> GetCarts()
-        => await _dbContext.Carts.ToListAsync();
-    
-    public async Task AddCart(Cart cart)
-    {
-        await _dbContext.Carts.AddAsync(cart);
-        await _dbContext.SaveChangesAsync();
-    }
+   
 }

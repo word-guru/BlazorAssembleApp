@@ -31,17 +31,17 @@
     @*         </p> *@
     @*     </div> *@
     @* } *@
-    
+
     <table class="table">
         <thead>
         <tr>
             <th scope="col"></th>
             <th scope="col">Название</th>
-             <th scope="col">Кол-во</th>
+            <th scope="col">Кол-во</th>
             <th scope="col">Описание</th>
             <th scope="col">Цена</th>
-            <th scope="col">Изменить</th>
-            <th scope="col">Удалить</th>
+            <th scope="col"></th>
+            @*<th scope="col">Удалить</th>*@
         </tr>
         </thead>
         <tbody>
@@ -49,14 +49,14 @@
         {
             <tr>
                 <td>
-                    <img src="@product.ImageUrl" alt="product image" style="width:100px;" />
+                    <img src="@product.ImageUrl" alt="product image" style="width:100px;"/>
                 </td>
                 <td class="align-middle" style="color: #0a58ca">
                     @product.Name
                 </td>
-                 <td class="align-middle">
-                     @product.Quantity
-                 </td>
+                <td class="align-middle">
+                    @product.Quantity
+                </td>
                 <td class="align-middle">
                     @product.Description
                 </td>
@@ -64,16 +64,19 @@
                     $@product.Price
                 </td>
                 <td class="align-middle">
-                    <button type="button" class="btn btn-info">Update</button>
+                    <button name="@product.Id"
+                            class="btn btn-primary btn-success"
+                            @onclick="@(() => { Client.AddToCart(product);
+                                                  toastService.ShowSuccess("Товар добавлен в корзину", "Выполнено"); })"
+                            type="submit">
+                        Купить
+                    </button>
                 </td>
-                <td class="align-middle">
-                    <button type="button" class="btn btn-danger">Delete</button>
-                </td>
+               
             </tr>
         }
         </tbody>
     </table>
-    
 }
 else
 {
@@ -82,11 +85,11 @@ else
 
 @code
 {
-    // private void SubmitToCart(Product product)
-    // {
-    //     Cart.AddingToCart(product);
-    //     JS.InvokeVoidAsync("show_message", args: "Товар добавлен в корзину!");
-    // }
+     private void SubmitToCart(Product product)
+     {
+         Client.AddToCart(product);
+         JS.InvokeVoidAsync("show_message", args: "Товар добавлен в корзину!");
+     }
 
     private IReadOnlyList<Product>? ProductList { get; set; }
 
