@@ -10,7 +10,7 @@ public interface IShopClient
     Task DeleteProduct(int id);
     Task<IReadOnlyList<Category>> GetCategories();
     Task<IReadOnlyList<Cart>> GetCartItems();
-    Task AddToCart(Product product);
+    Task AddToCart(Cart cart);
     Task DeleteCart(long id);
     Task ClearCart();
 }

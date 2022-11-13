@@ -14,7 +14,9 @@
 @*             <button @onclick="@((long id) => Client.DeleteCart(id))" class="btn btn-primary">Удалить товар</button> *@
 @*         </p> *@
 @* } *@
- <table class="table">
+@if (Product != null)
+{
+    <table class="table">
         <thead>
         <tr>
             <th scope="col"></th>
@@ -26,10 +28,9 @@
         </thead>
         <tbody>
 
-       
-        @foreach (var cart in CartList)
+
+        @foreach (var product in Product)
         {
-           var product = await GetProduct(cart);
             <tr>
                 <td>
                     <img src="@product.ImageUrl" alt="product image" style="width:100px;"/>
@@ -37,17 +38,22 @@
                 <td class="align-middle" style="color: #0a58ca">
                     @product.Name
                 </td>
-            <td class="align-middle">
+                <td class="align-middle">
                     $@product.Price
                 </td>
                 <td class="align-middle">
-                     <button @onclick="@(() => Client.DeleteCart(cart.Id))" class="btn btn-danger">Удалить из корзины</button>
+                    <button @onclick="@(() => Client.DeleteCart(product.Id))" class="btn btn-danger">Удалить из корзины</button>
                 </td>
-               
+
             </tr>
         }
         </tbody>
     </table>
+}
+else
+{
+    <p>Loading...</p>
+}
 
 <div>
     <button @onclick="@(() => Client.ClearCart())" class="btn btn-primary">Очистить корзину</button>
@@ -56,18 +62,21 @@
 @code{
     
     private IReadOnlyList<Cart>? CartList { get; set; }
-
+    private List<Product> Product { get; set; }
+    
 
     protected override async Task OnInitializedAsync()
     {
         CartList = await Client.GetCartItems();
     }
 
-    private async Task<Product> GetProduct(Cart cart)
+    private async Task GetProduct()
     {
-        var product = await Client.GetProduct(cart.ProductId);
-
-        return product;
+        if (CartList != null)
+            foreach (var cart in CartList)
+            {
+                Product.Add(await Client.GetProduct(cart.ProductId));
+            }
     }
 
 }

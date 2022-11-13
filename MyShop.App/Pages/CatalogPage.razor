@@ -12,26 +12,6 @@
 
 @if (ProductList != null)
 {
-    @* @foreach (var product in ProductList) *@
-    @* { *@
-    @*     <div> *@
-    @*         <p> *@
-    @*             @product.Name (цена: @product.Price) *@
-    @*             <button name="@product.Id" *@
-    @*                     class="btn btn-primary btn-success" *@
-    @*                     @onclick="@(() => { *@
-    @*                                          // Cart.AddingToCart(product); *@
-    @*                                           toastService.ShowSuccess("Товар добавлен в корзину", "Выполнено"); *@
-    @* *@
-    @*                               })" *@
-    @*                     type="submit"> *@
-    @*                 Купить *@
-    @*             </button> *@
-    @* *@
-    @*         </p> *@
-    @*     </div> *@
-    @* } *@
-
     <table class="table">
         <thead>
         <tr>
@@ -66,7 +46,7 @@
                 <td class="align-middle">
                     <button name="@product.Id"
                             class="btn btn-primary btn-success"
-                            @onclick="@(() => { Client.AddToCart(product);
+                            @onclick="@(() => { Client.AddToCart(AddCart(product));
                                                   toastService.ShowSuccess("Товар добавлен в корзину", "Выполнено"); })"
                             type="submit">
                         Купить
@@ -85,11 +65,21 @@ else
 
 @code
 {
-     private void SubmitToCart(Product product)
+     private void SubmitToCart(Cart cart)
      {
-         Client.AddToCart(product);
+         
+         Client.AddToCart(cart);
          JS.InvokeVoidAsync("show_message", args: "Товар добавлен в корзину!");
      }
+
+    private Cart AddCart(Product product)
+    {
+        Cart cart = new Cart();
+        cart.ProductId = (int)product.Id;
+        cart.Quantity = 1;
+
+        return cart;
+    }
 
     private IReadOnlyList<Product>? ProductList { get; set; }
 

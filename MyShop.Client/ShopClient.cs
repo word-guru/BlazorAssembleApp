@@ -91,14 +91,14 @@ public class ShopClient : IShopClient
         return response;
     }
     
-    public async Task AddToCart(Product product)
+    public async Task AddToCart(Cart cart)
     {
-        if (product is null)
+        if (cart is null)
         {
-            throw new ArgumentNullException(nameof(product));
+            throw new ArgumentNullException(nameof(cart));
         }
         var uri = $"{_host}/cart/add_cart";
-        await _httpClient.PostAsJsonAsync(uri, product);
+        await _httpClient.PostAsJsonAsync(uri, cart);
     }
     public async Task DeleteCart(long id)
     {
