@@ -44,7 +44,7 @@ public class ShopClient : IShopClient
     public async Task<Product> GetProduct(int id)
     {
         var uri = $"{_host}/{_controller}/get_product";
-        var product = await _httpClient.GetFromJsonAsync<Product>($"{uri}?productId={id}");
+        var product = await _httpClient.GetFromJsonAsync<Product>($"{uri}?Id={id}");
         if (product is null)
         {
             throw new InvalidOperationException("Product can`t be null");

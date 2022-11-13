@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyShop.Models;
-using MyShop.Server.Date;
+using MyShop.Server.Date.Repository.Interface;
 
-namespace MyShop.Server.Repository;
+namespace MyShop.Server.Date.Repository;
 
 public class CartRepository : ICartRepository
 {

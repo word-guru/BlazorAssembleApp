@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyShop.Models;
+using MyShop.Server.Date.Repository.Interface;
 using MyShop.Server.Repository;
 
 namespace MyShop.Server.Controllers;
@@ -20,10 +21,10 @@ public class CartController : ControllerBase
         await _cartRepository.AddCart(cart);
     }
 
-    [HttpPost("get_cart")]
-    public async Task GetCart()
+    [HttpGet("get_carts")]
+    public async Task<IEnumerable<Cart>> GetCarts()
     {
-        await _cartRepository.GetCarts();
+       return await _cartRepository.GetCarts();
     }
 
     [HttpPost("delete_cart")]

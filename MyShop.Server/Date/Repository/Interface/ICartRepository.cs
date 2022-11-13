@@ -1,6 +1,6 @@
 ﻿using MyShop.Models;
 
-namespace MyShop.Server.Repository;
+namespace MyShop.Server.Date.Repository.Interface;
 
 public interface ICartRepository
 {

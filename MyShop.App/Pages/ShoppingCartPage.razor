@@ -14,7 +14,7 @@
 @*             <button @onclick="@((long id) => Client.DeleteCart(id))" class="btn btn-primary">Удалить товар</button> *@
 @*         </p> *@
 @* } *@
-@if (Product != null)
+@if (CartList != null)
 {
     <table class="table">
         <thead>
@@ -29,21 +29,24 @@
         <tbody>
 
 
-        @foreach (var product in Product)
+        @foreach (var product in CartList)
         {
             <tr>
-                <td>
-                    <img src="@product.ImageUrl" alt="product image" style="width:100px;"/>
-                </td>
-                <td class="align-middle" style="color: #0a58ca">
-                    @product.Name
-                </td>
-                <td class="align-middle">
-                    $@product.Price
-                </td>
-                <td class="align-middle">
-                    <button @onclick="@(() => Client.DeleteCart(product.Id))" class="btn btn-danger">Удалить из корзины</button>
-                </td>
+                @* <td> *@
+                @*     <img src="@product.ImageUrl" alt="product image" style="width:100px;"/> *@
+                @* </td> *@
+                @* <td class="align-middle" style="color: #0a58ca"> *@
+                @*     @product.Name *@
+                @* </td> *@
+                @* <td class="align-middle"> *@
+                @*     $@product.Price *@
+                @* </td> *@
+                @* <td class="align-middle"> *@
+                @*     <button @onclick="@(() => Client.DeleteCart(product.Id))" class="btn btn-danger">Удалить из корзины</button> *@
+                @* </td> *@
+                <td> 
+                   @product.Id
+                    </td>
 
             </tr>
         }
@@ -61,22 +64,22 @@ else
 
 @code{
     
-    private IReadOnlyList<Cart>? CartList { get; set; }
-    private List<Product> Product { get; set; }
+    private IEnumerable<Cart>? CartList { get; set; }
+    //private List<Product> Product { get; set; }
     
 
     protected override async Task OnInitializedAsync()
     {
         CartList = await Client.GetCartItems();
+        
     }
-
-    private async Task GetProduct()
-    {
-        if (CartList != null)
-            foreach (var cart in CartList)
-            {
-                Product.Add(await Client.GetProduct(cart.ProductId));
-            }
-    }
-
+    
+    // private async Task GetToProduct()
+    // { 
+    //     foreach(var cart in CartList)
+    //     {
+    //         Product.Add(await Client.GetProduct(cart.ProductId));
+    //     }
+    //
+    // }
 }
