@@ -1,7 +1,7 @@
 ﻿using System.Net.Http.Json;
 using MyShop.Models;
 
-namespace MyShop.Client;
+namespace MyShop.HttpApiClient;
 
 public class ShopClient : IShopClient
 {

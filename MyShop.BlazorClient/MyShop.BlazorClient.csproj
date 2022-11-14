@@ -15,7 +15,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\MyShop.Models\MyShop.Models.csproj" />
-      <ProjectReference Include="..\MyShop.Client\MyShop.Client.csproj" />
+      <ProjectReference Include="..\MyShop.HttpApiClient\MyShop.HttpApiClient.csproj" />
     </ItemGroup>
 
 </Project>

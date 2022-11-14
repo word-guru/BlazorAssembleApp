@@ -1,4 +1,4 @@
-﻿namespace MyShop.App.Data.Interface;
+﻿namespace MyShop.BlazorClient.Data.Interface;
 
 public interface IClock
 {

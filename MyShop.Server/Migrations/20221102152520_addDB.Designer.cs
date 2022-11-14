@@ -18,7 +18,7 @@ namespace MyShop.Server.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.10");
 
-            modelBuilder.Entity("MyShop.App.Data.Product", b =>
+            modelBuilder.Entity("MyShop.BlazorClient.Data.Product", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()

@@ -1,6 +1,6 @@
 ﻿using MyShop.Models;
 
-namespace MyShop.Client;
+namespace MyShop.HttpApiClient;
 
 public interface IShopClient
 {
