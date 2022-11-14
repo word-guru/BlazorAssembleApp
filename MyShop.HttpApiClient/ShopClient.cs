@@ -114,4 +114,11 @@ public class ShopClient : IShopClient
 
        // response.EnsureSuccessStatusCode();
     }
+
+    public async Task RegisterAccount(Account account)
+    {
+        var uri = $"{_host}/account/register";
+        var response = await _httpClient.PostAsJsonAsync(uri, account);
+        response.EnsureSuccessStatusCode();
+    }
 }

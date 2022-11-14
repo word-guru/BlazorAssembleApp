@@ -1,0 +1,45 @@
+﻿@page "/Registration"
+@using MyShop.Models
+@using MyShop.HttpApiClient
+
+@inject IShopClient Client
+
+<h3>Регистрация в системе</h3>
+
+<EditForm Model="_model" OnInvalidSubmit="Register">
+    <DataAnnotationsValidator/>
+    <table>
+        <tr>
+            <td>Имя</td>
+            <td><inputText type="text" class="form-control" @bind-Value="_model.Name"/></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><inputText type="text" class="form-control" @bind-Value="_model.Email"/></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><inputText type="password" class="form-control" @bind-Value="_model.Password"/></td>
+        </tr>
+        <tr><td class="row-cols-2"><ValidationSummary/></td></tr>
+        <tr><input type="submit" class="btn btn-primary" value="Зарегестрироваться"/></tr>
+
+    </table>
+</EditForm>
+@if (_registered)
+{
+    <h2 class="text-success">Вы успешно зарегестрированны</h2>
+}
+
+@code {
+    private readonly Account _model = new();
+    private bool _registered = false;
+    
+
+    private async Task Register()
+    {
+        await Client.RegisterAccount(_model);
+        //NavigationManager - перенаправить
+        _registered = true;
+    }
+}
