@@ -1,8 +1,8 @@
 ﻿namespace MyShop.Models;
 
-public class Cart
+public class Cart : IEntity
 {
-    public long Id { get; set; }
-    public int ProductId { get; set; }
+    public Guid Id { get; set; }
+    public Guid ProductId { get; set; }
     public int Quantity { get; set; }
 }

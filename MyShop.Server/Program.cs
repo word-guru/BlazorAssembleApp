@@ -11,11 +11,12 @@ var dbPath = "myapp.db";
 
 // AddProduct services to the container.
 
+builder.Services.AddDbContext<AppDbContext>(
+    options => options.UseSqlite($"Data Source={dbPath}"));
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<AppDbContext>(
-    options => options.UseSqlite($"Data Source={dbPath}"));
 builder.Services.AddCors();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICartRepository, CartRepository>();

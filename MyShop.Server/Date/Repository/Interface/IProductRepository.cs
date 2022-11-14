@@ -6,7 +6,7 @@ namespace MyShop.Server.Repository;
 
 public interface IProductRepository
 {
-    public Task<Product> GetProduct(long id);
+    public Task<Product> GetProduct(Guid id);
     public Task<IEnumerable<Product>> GetAllProducts();
     public Task DeleteProduct(Product product);
     public Task AddProduct(Product product);

@@ -2,9 +2,9 @@
 
 namespace MyShop.Models;
 
-public class Account
+public class Account : IEntity
 {
-    public long Id { get; set; }
+    public Guid Id { get; set; }
     [Required,MinLength(3)]
     public string Name { get; set; }
     [Required,EmailAddress]

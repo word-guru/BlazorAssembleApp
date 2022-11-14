@@ -24,4 +24,11 @@ public class AccountController : ControllerBase
         _accountRepository.Add(account);
         return Ok();
     }
+    
+    [HttpPost("delete_account")]
+    public async Task<IActionResult> DeleteAccount(Guid id)
+    {
+        await _accountRepository.DeleteById(id);
+        return Ok();
+    }
 }

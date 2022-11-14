@@ -1,9 +1,9 @@
 ﻿namespace MyShop.Models;
 
-public class Product
+public class Product : IEntity
 {
     public Product(
-        long              id, 
+        Guid              id, 
         string            name, 
         decimal           price, 
         string            description, 
@@ -25,7 +25,7 @@ public class Product
     {
     }
 
-    public long Id { get; set; }
+    public Guid Id { get; set; }
     public string Name { get; set; }
     public decimal Price { get; set; }
     public string Description { get; set; }

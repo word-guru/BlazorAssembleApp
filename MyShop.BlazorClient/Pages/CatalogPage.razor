@@ -75,7 +75,7 @@ else
     private Cart AddCart(Product product)
     {
         Cart cart = new Cart();
-        cart.ProductId = (int)product.Id;
+        cart.ProductId = product.Id;
         cart.Quantity = 1;
 
         return cart;

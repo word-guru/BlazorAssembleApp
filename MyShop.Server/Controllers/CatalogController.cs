@@ -21,7 +21,7 @@ public class CatalogController : ControllerBase
     }
 
     [HttpGet("get_product")]
-    public async Task<Product?> GetProduct(long id)
+    public async Task<Product?> GetProduct(Guid id)
     {
         var product = await _productRepository.GetProduct(id);
         if (product is null)
@@ -38,7 +38,7 @@ public class CatalogController : ControllerBase
     }
     
     [HttpPost("delete_product")]
-    public async Task DeleteProduct(long id)
+    public async Task DeleteProduct(Guid id)
     {
         var product = await _productRepository.GetProduct(id);
 
