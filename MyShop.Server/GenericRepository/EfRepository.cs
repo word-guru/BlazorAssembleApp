@@ -7,7 +7,7 @@ namespace MyShop.Server.GenericRepository;
 
 public class EfRepository<TEntity> : IGRepository<TEntity> where TEntity : class,IEntity
 {
-    private readonly AppDbContext _dbContext;
+    protected readonly AppDbContext _dbContext;
     private DbSet<TEntity> Entities => _dbContext.Set<TEntity>();
 
     public EfRepository(AppDbContext dbContext)

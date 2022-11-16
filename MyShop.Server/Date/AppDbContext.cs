@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MyShop.Models;
 
 namespace MyShop.Server.Date;
@@ -16,4 +17,8 @@ public class AppDbContext : DbContext
         DbContextOptions<AppDbContext> options) 
         : base(options) { } //Bogus заполнение бд
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+       modelBuilder.Entity<Account>().HasIndex(b => b.Email).IsUnique();
+    }
 }

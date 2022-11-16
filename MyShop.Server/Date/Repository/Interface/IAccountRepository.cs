@@ -5,5 +5,5 @@ namespace MyShop.Server.Date.Repository.Interface;
 
 public interface IAccountRepository : IGRepository<Account>
 {
-    
+  Task<Account?> FindByEmail(string email);
 }

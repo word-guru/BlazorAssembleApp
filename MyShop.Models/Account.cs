@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 
 namespace MyShop.Models;
 
-public class Account : IEntity
+public record Account : IEntity
 {
     public Guid Id { get; set; }
     [Required,MinLength(3)]
@@ -11,4 +12,6 @@ public class Account : IEntity
     public string Email { get; set; }
     [Required,MinLength(6)]
     public string Password { get; set; }
+    
+
 }

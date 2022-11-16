@@ -19,12 +19,22 @@ public class AccountController : ControllerBase
     public async Task<ActionResult> Register(Account account) //[FromBody]
     {
         //if (ModelState.IsValid) 
-          //  return ValidationProblem(new ValidationProblemDetails(ModelState));
-          account.Id = Guid.NewGuid();
-        _accountRepository.Add(account);
-        return Ok();
+        //  return ValidationProblem(new ValidationProblemDetails(ModelState));
+        account.Id = Guid.NewGuid();
+       Account? existedAccount = await _accountRepository
+           .FindByEmail(account.Email);
+       
+       if (existedAccount is not null)
+       {
+           return BadRequest(new {Message = "Такой email уже существует"});
+         
+       }
+       
+       await _accountRepository.Add(account);
+
+       return Ok();
     }
-    
+
     [HttpPost("delete_account")]
     public async Task<IActionResult> DeleteAccount(Guid id)
     {
