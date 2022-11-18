@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyShop.Models;
 using MyShop.Server.Date.Repository.Interface;
+using MyShop.Server.GenericRepository.InterfaceGenericRepozitory;
 using MyShop.Server.Repository;
 
 namespace MyShop.Server.Controllers;
@@ -8,34 +9,34 @@ namespace MyShop.Server.Controllers;
 [Route("cart")]
 public class CartController : ControllerBase
 {
-    private readonly ICartRepository _cartRepository;
+    private readonly IGRepository<Cart> _cart;
 
-    public CartController(ICartRepository cartRepository)
+    public CartController(IGRepository<Cart> cart)
     {
-        _cartRepository = cartRepository;
+        _cart = cart;
     }
 
     [HttpPost("add_cart")]
     public async Task AddCart(Cart cart)
     {
-        await _cartRepository.AddCart(cart);
+        await _cart.Add(cart);
     }
 
     [HttpGet("get_carts")]
     public async Task<IEnumerable<Cart>> GetCarts()
     {
-       return await _cartRepository.GetCarts();
+       return await _cart.GetAll();
     }
 
     [HttpPost("delete_cart")]
-    public async Task DeleteCart(Cart cart)
+    public async Task Delete(Guid id)
     {
-        await _cartRepository.DeleteCartProduct(cart);
+        await _cart.DeleteById(id);
     }
 
-    [HttpPost("clear_cart")]
-    public async Task ClearCart()
-    {
-        await _cartRepository.ClearCartProduct();
-    }
+    // [HttpPost("clear_cart")]
+    // public async Task ClearCart()
+    // {
+    //     await _cartRepository.ClearCartProduct();
+    // }
 }

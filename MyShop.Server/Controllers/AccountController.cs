@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyShop.Exeptions;
 using MyShop.Models;
 using MyShop.Server.Date.Repository.Interface;
+using MyShop.Server.Services;
 
 namespace MyShop.Server.Controllers;
 
@@ -9,30 +11,27 @@ namespace MyShop.Server.Controllers;
 public class AccountController : ControllerBase
 {
     private readonly IAccountRepository _accountRepository;
-
+    private readonly IAccountServices _accountService;
     public AccountController(IAccountRepository accountRepository)
     {
         _accountRepository = accountRepository;
     }
 
     [HttpPost("register")]
-    public async Task<ActionResult> Register(Account account) //[FromBody]
+    public async Task<ActionResult<Account>> Register(Account account) //[FromBody]
     {
-        //if (ModelState.IsValid) 
-        //  return ValidationProblem(new ValidationProblemDetails(ModelState));
-        account.Id = Guid.NewGuid();
-       Account? existedAccount = await _accountRepository
-           .FindByEmail(account.Email);
-       
-       if (existedAccount is not null)
-       {
-           return BadRequest(new {Message = "Такой email уже существует"});
-         
-       }
-       
-       await _accountRepository.Add(account);
-
-       return Ok();
+        try
+        {
+            return await _accountService.Register(account);
+           
+        }
+        catch (ExclusionOfEmailRegistration)
+        {
+            return BadRequest(new
+            {
+                Message = "Такой Email уже зарегистрирован"
+            });
+        }
     }
 
     [HttpPost("delete_account")]

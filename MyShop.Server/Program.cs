@@ -5,6 +5,7 @@ using MyShop.Server.Date;
 using MyShop.Server.Date.Repository;
 using MyShop.Server.Date.Repository.Interface;
 using MyShop.Server.Repository;
+using MyShop.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var dbPath = "myapp.db";
@@ -20,6 +21,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<IAccountServices, AccountServices>();
 
 var app = builder.Build();
 

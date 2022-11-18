@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShop.HttpApiClient", "MyS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShop.Models", "MyShop.Models\MyShop.Models.csproj", "{8E53FC35-9A49-4DA9-AB2B-B8443ED47808}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShop.Exeptions", "MyShop.Exeptions\MyShop.Exeptions.csproj", "{D82DEFC8-0B88-48C2-AC27-1ACB623576EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{8E53FC35-9A49-4DA9-AB2B-B8443ED47808}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E53FC35-9A49-4DA9-AB2B-B8443ED47808}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E53FC35-9A49-4DA9-AB2B-B8443ED47808}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D82DEFC8-0B88-48C2-AC27-1ACB623576EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D82DEFC8-0B88-48C2-AC27-1ACB623576EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D82DEFC8-0B88-48C2-AC27-1ACB623576EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D82DEFC8-0B88-48C2-AC27-1ACB623576EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
