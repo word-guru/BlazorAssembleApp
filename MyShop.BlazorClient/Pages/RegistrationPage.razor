@@ -1,12 +1,13 @@
 ﻿@page "/registration"
-@using MyShop.Server.Repository.Models
-@using MyShop.Server.Repository.HttpApiClient
+@using MyShop.Models
+@using MyShop.HttpApiClient
 
 @inject IShopClient Client
+@inject IToastService Toast
 
 <h3>Регистрация в системе</h3>
 
-<EditForm Model="_model" OnInvalidSubmit="Register">
+<EditForm Model="_model" OnValidSubmit="Register">
     <DataAnnotationsValidator/>
     <table>
         <tr>
@@ -28,7 +29,7 @@
 </EditForm>
 @if (_registered)
 {
-    <h2 class="text-success">Вы успешно зарегестрированны</h2>
+  Toast.ShowInfo("Вы успешно зарегестрированны!");
 }
 
 @code {

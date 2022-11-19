@@ -5,7 +5,7 @@ using MyShop.Server.Repository.BlazorClient.Data;
 using MyShop.Server.Repository.BlazorClient.Data.Interface;
 using Blazored.Toast;
 using MyShop.BlazorClient;
-using MyShop.Server.Repository.HttpApiClient;
+using MyShop.HttpApiClient;
 
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);

@@ -1,4 +1,6 @@
-﻿namespace MyShop.Server.Repository.Models;
+﻿using MyShop.Models;
+
+namespace MyShop.Server.Repository.Models;
 
 public class Category : IEntity
 {

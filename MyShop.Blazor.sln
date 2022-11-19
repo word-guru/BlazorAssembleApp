@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShop.BlazorClient", "MyShop.BlazorClient\MyShop.BlazorClient.csproj", "{3482667C-9DCE-40A0-AAB8-81DB1FDF1671}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShop.Server", "MyShop.Server\MyShop.Server.csproj", "{545ED99E-5953-4BA1-8E3C-7D581B08C000}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShop.WebApi", "MyShop.WebApi\MyShop.WebApi.csproj", "{545ED99E-5953-4BA1-8E3C-7D581B08C000}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShop.HttpApiClient", "MyShop.HttpApiClient\MyShop.HttpApiClient.csproj", "{68B30A44-B470-48C4-9FC4-C0A2EFC4ADE2}"
 EndProject
