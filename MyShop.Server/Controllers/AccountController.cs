@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MyShop.Exeptions;
-using MyShop.Models;
-using MyShop.Server.Date.Repository.Interface;
-using MyShop.Server.Services;
+using MyShop.Server.Repositories.Interface;
+using MyShop.Server.Repository.Exeptions;
+using MyShop.Server.Repository.Models;
+using MyShop.Server.Repository.Server.Services;
 
-namespace MyShop.Server.Controllers;
+namespace MyShop.Server.Repository.Server.Controllers;
 
 [ApiController]
 [Route("account")]
@@ -27,6 +27,7 @@ public class AccountController : ControllerBase
         }
         catch (ExclusionOfEmailRegistration)
         {
+            
             return BadRequest(new
             {
                 Message = "Такой Email уже зарегистрирован"

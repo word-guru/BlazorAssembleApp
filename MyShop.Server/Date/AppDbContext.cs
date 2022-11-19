@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MyShop.Models;
+using MyShop.Server.Repository.Models;
 
-namespace MyShop.Server.Date;
+namespace MyShop.Server.Repository.Server.Date;
 
 public class AppDbContext : DbContext
 {
@@ -13,8 +13,7 @@ public class AppDbContext : DbContext
     
     public Task Product { get; set; }
 
-    public AppDbContext(
-        DbContextOptions<AppDbContext> options) 
+    public AppDbContext(DbContextOptions<AppDbContext> options) 
         : base(options) { } //Bogus заполнение бд
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

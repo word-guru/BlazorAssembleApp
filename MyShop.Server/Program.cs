@@ -1,11 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MyShop.Models;
-using MyShop.Server.Date;
-using MyShop.Server.Date.Repository;
-using MyShop.Server.Date.Repository.Interface;
-using MyShop.Server.Repository;
-using MyShop.Server.Services;
+using MyShop.Server.Repositories;
+using MyShop.Server.Repositories.Interface;
+using MyShop.Server.Repository.Models;
+using MyShop.Server.Repository.Server.Date;
+using MyShop.Server.Repository.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var dbPath = "myapp.db";

@@ -1,4 +1,4 @@
-﻿namespace MyShop.Models;
+﻿namespace MyShop.Server.Repository.Models;
 
 public interface IEntity
 {

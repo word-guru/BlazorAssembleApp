@@ -1,4 +1,4 @@
-namespace MyShop.Server;
+namespace MyShop.Server.Repository.Server;
 
 public class WeatherForecast
 {

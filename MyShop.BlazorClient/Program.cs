@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using MyShop.BlazorClient;
-using MyShop.BlazorClient.Data;
-using MyShop.BlazorClient.Data.Interface;
+using MyShop.Server.Repository.BlazorClient;
+using MyShop.Server.Repository.BlazorClient.Data;
+using MyShop.Server.Repository.BlazorClient.Data.Interface;
 using Blazored.Toast;
-using MyShop.HttpApiClient;
+using MyShop.BlazorClient;
+using MyShop.Server.Repository.HttpApiClient;
 
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);

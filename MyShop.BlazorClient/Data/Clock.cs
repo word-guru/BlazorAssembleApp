@@ -1,6 +1,6 @@
-﻿using MyShop.BlazorClient.Data.Interface;
+﻿using MyShop.Server.Repository.BlazorClient.Data.Interface;
 
-namespace MyShop.BlazorClient.Data;
+namespace MyShop.Server.Repository.BlazorClient.Data;
 
 public class Clock : IClock
 {

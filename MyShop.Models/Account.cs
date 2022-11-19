@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 
-namespace MyShop.Models;
+namespace MyShop.Server.Repository.Models;
 
 public record Account : IEntity
 {

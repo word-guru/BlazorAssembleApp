@@ -1,7 +1,7 @@
-﻿using MyShop.Models;
-using MyShop.Server.GenericRepository.InterfaceGenericRepozitory;
+﻿using MyShop.Server.Repository.Models;
+using MyShop.Server.Repository.Server.GenericRepository.InterfaceGenericRepozitory;
 
-namespace MyShop.Server.Date.Repository.Interface;
+namespace MyShop.Server.Repositories.Interface;
 
 public interface IAccountRepository : IGRepository<Account>
 {

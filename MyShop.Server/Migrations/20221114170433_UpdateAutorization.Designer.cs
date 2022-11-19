@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MyShop.Server.Date;
+using MyShop.Server.Repository.Server.Date;
 
 #nullable disable
 
-namespace MyShop.Server.Migrations
+namespace MyShop.Server.Repository.Server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20221114170433_UpdateAutorization")]

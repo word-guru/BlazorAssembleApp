@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MyShop.Models;
-using MyShop.Server.Date.Repository.Interface;
-using MyShop.Server.GenericRepository;
+using MyShop.Server.Repositories.Interface;
+using MyShop.Server.Repository.Models;
+using MyShop.Server.Repository.Server.Date;
+using MyShop.Server.Repository.Server.GenericRepository;
 
-namespace MyShop.Server.Date.Repository;
+namespace MyShop.Server.Repositories;
 
 public class AccountRepository : EfRepository<Account>, IAccountRepository
 {

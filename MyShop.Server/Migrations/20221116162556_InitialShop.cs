@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace MyShop.Server.Migrations
+namespace MyShop.Server.Repository.Server.Migrations
 {
     public partial class InitialShop : Migration
     {

@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MyShop.Models;
-using MyShop.Server.Date.Repository.Interface;
-using MyShop.Server.GenericRepository.InterfaceGenericRepozitory;
-using MyShop.Server.Repository;
+using MyShop.Server.Repository.Models;
+using MyShop.Server.Repository.Server.GenericRepository.InterfaceGenericRepozitory;
 
-namespace MyShop.Server.Controllers;
+namespace MyShop.Server.Repository.Server.Controllers;
 
 [Route("cart")]
 public class CartController : ControllerBase

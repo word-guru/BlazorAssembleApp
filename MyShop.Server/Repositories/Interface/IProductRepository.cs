@@ -1,8 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MyShop.Models;
-using MyShop.Server.Date;
+﻿using MyShop.Server.Repository.Models;
 
-namespace MyShop.Server.Repository;
+namespace MyShop.Server.Repositories.Interface;
 
 public interface IProductRepository
 {

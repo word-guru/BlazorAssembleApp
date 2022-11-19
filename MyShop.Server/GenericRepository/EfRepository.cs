@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MyShop.Models;
-using MyShop.Server.Date;
-using MyShop.Server.GenericRepository.InterfaceGenericRepozitory;
+using MyShop.Server.Repository.Models;
+using MyShop.Server.Repository.Server.Date;
+using MyShop.Server.Repository.Server.GenericRepository.InterfaceGenericRepozitory;
 
-namespace MyShop.Server.GenericRepository;
+namespace MyShop.Server.Repository.Server.GenericRepository;
 
 public class EfRepository<TEntity> : IGRepository<TEntity> where TEntity : class,IEntity
 {

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MyShop.Exeptions;
-using MyShop.Models;
-using MyShop.Server.Date.Repository.Interface;
+using MyShop.Server.Repositories.Interface;
+using MyShop.Server.Repository.Exeptions;
+using MyShop.Server.Repository.Models;
 
-namespace MyShop.Server.Services;
+namespace MyShop.Server.Repository.Server.Services;
 
 public class AccountServices : IAccountServices
 {

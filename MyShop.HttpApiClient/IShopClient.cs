@@ -1,6 +1,6 @@
-﻿using MyShop.Models;
+﻿using MyShop.Server.Repository.Models;
 
-namespace MyShop.HttpApiClient;
+namespace MyShop.Server.Repository.HttpApiClient;
 
 public interface IShopClient
 {

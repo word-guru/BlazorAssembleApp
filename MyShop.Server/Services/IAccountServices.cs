@@ -1,6 +1,6 @@
-﻿using MyShop.Models;
+﻿using MyShop.Server.Repository.Models;
 
-namespace MyShop.Server.Services;
+namespace MyShop.Server.Repository.Server.Services;
 
 public interface IAccountServices
 {
