@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MyShop.Server.Repository.Models;
 
-namespace MyShop.Server.Repository.Server.Date;
+namespace MyShop.Server.Date;
 
 public class AppDbContext : DbContext
 {

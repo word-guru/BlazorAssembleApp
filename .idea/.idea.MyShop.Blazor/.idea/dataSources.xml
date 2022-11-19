@@ -2,10 +2,10 @@
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
     <data-source source="LOCAL" name="myapp" uuid="46a0dffd-a5b7-4b05-a51d-f8b2bffe436c">
-      <driver-ref>6e78300c-d43d-467b-8fc4-8170ca2e8334</driver-ref>
+      <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:E:\С# ASP.NET\BlazorAssembleApp\MyShop.Server\MyShop.Server.csproj</jdbc-url>
+      <jdbc-url>jdbc:sqlite:D:\Project\ASPCore\RiderProject\MyShop.Server\MyShop.Server.csproj</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
       <libraries>
         <library>

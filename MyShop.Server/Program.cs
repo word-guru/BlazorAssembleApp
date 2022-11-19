@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MyShop.Server.Date;
 using MyShop.Server.Repositories;
 using MyShop.Server.Repositories.Interface;
 using MyShop.Server.Repository.Models;
-using MyShop.Server.Repository.Server.Date;
+using MyShop.Server.Repository.Server.GenericRepository;
+using MyShop.Server.Repository.Server.GenericRepository.InterfaceGenericRepozitory;
 using MyShop.Server.Repository.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,9 @@ var dbPath = "myapp.db";
 
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseSqlite($"Data Source={dbPath}"));
+
+builder.Services.AddScoped(
+    typeof(IGRepository<>), typeof(EfRepository<>));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -35,15 +40,7 @@ app.UseCors(policy =>
         )
         .AllowCredentials();
 });
-/*app.UseCors(policy =>
-    policy.WithOrigins("http://localhost:7296, https://localhost:7296")
-        .AllowAnyMethod()
-        .WithHeaders(HeaderNames.ContentType)
-);
 
-//app.MapGet("/catalog", async (IProductRepository productRepository) => await productRepository.GetAllProducts());
-
-// Configure the HTTP request pipeline.*/
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -51,61 +48,5 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-/*app.MapPost("/add_product", async ([FromBody] Product product, 
-                                               [FromServices] IProductRepository productRepository) =>
-{
-    await productRepository.AddProduct(product);
-    //await dbContext.SaveChangesAsync();
-});
-
-app.MapGet("/get_products", ([FromServices] IProductRepository productRepository) =>
-{
-    return productRepository.GetAllProducts();
-});
-
-app.MapPost("/update_product",
-    async ([FromServices] IProductRepository productRepository,
-        [FromQuery] long id, [FromBody] Product newProduct) =>
-    {
-        var product = await productRepository.GetProduct(id);
-        if (product is null)
-        {
-            return Results.NotFound(new {message = "Товар не найден"});
-        }
-
-        product.Name = newProduct.Name;
-        product.Price = newProduct.Price;
-        return Results.Ok();
-    });
-
-app.MapGet("/get_product",
-    async ([FromServices] IProductRepository productRepository,
-        [FromQuery] long id) =>
-    {
-        var product = await productRepository.GetProduct(id);
-        if (product is null)
-        {
-            return Results.NotFound(new {message = "Товар не найден"});
-        }
-
-        return Results.Ok(product);
-    });
-
-app.MapPost("/delete_product",
-    async ([FromServices]IProductRepository productRepository,
-        [FromQuery] long id) =>
-    {
-        var product = await productRepository.GetProduct(id);
-        if (product is null)
-        {
-            return Results.NotFound(new {message = "Товар не найден"});
-        }
-
-        productRepository.DeleteProduct(product!);
-
-        return Results.Ok();
-    });*/
 app.MapControllers();
-
 app.Run();

@@ -12,9 +12,13 @@ public class AccountController : ControllerBase
 {
     private readonly IAccountRepository _accountRepository;
     private readonly IAccountServices _accountService;
-    public AccountController(IAccountRepository accountRepository)
+    public AccountController(
+        IAccountRepository accountRepository,
+        IAccountServices accountService
+        )
     {
         _accountRepository = accountRepository;
+        _accountService = accountService;
     }
 
     [HttpPost("register")]

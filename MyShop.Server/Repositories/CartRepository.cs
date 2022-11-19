@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MyShop.Server.Date;
 using MyShop.Server.Repositories.Interface;
 using MyShop.Server.Repository.Models;
-using MyShop.Server.Repository.Server.Date;
 
 namespace MyShop.Server.Repositories;
 
