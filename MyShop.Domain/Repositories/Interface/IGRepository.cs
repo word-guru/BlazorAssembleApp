@@ -1,6 +1,6 @@
 ﻿using MyShop.Models;
 
-namespace MyShop.WebApi.GenericRepository.InterfaceGenericRepozitory;
+namespace MyShop.Domain.Repositories.Interface;
 
 public interface IGRepository<TEntity> where TEntity : IEntity
 {

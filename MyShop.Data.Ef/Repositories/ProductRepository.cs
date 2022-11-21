@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MyShop.Domain.Repositories.Interface;
 using MyShop.Models;
 using MyShop.Server.Repository.Models;
-using MyShop.WebApi.Date;
-using MyShop.WebApi.Repositories.Interface;
 
-namespace MyShop.WebApi.Repositories;
+namespace MyShop.Data.Ef.Repositories;
 
 public class ProductRepository : IProductRepository
 {

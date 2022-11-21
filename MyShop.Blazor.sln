@@ -8,7 +8,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShop.HttpApiClient", "MyS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShop.Models", "MyShop.Models\MyShop.Models.csproj", "{8E53FC35-9A49-4DA9-AB2B-B8443ED47808}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShop.Exeptions", "MyShop.Exeptions\MyShop.Exeptions.csproj", "{D82DEFC8-0B88-48C2-AC27-1ACB623576EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShop.Domain", "MyShop.Domain\MyShop.Domain.csproj", "{A3CD386C-4572-4DFD-B706-98C86A25BEF7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infrastructure", "infrastructure", "{0F9D1880-BFFB-4992-95D1-17604D62541C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShop.Data.Ef", "MyShop.Data.Ef\MyShop.Data.Ef.csproj", "{C69FDE91-25F8-4A25-AB27-1F14B4AF8F55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,9 +36,16 @@ Global
 		{8E53FC35-9A49-4DA9-AB2B-B8443ED47808}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E53FC35-9A49-4DA9-AB2B-B8443ED47808}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E53FC35-9A49-4DA9-AB2B-B8443ED47808}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D82DEFC8-0B88-48C2-AC27-1ACB623576EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D82DEFC8-0B88-48C2-AC27-1ACB623576EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D82DEFC8-0B88-48C2-AC27-1ACB623576EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D82DEFC8-0B88-48C2-AC27-1ACB623576EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3CD386C-4572-4DFD-B706-98C86A25BEF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3CD386C-4572-4DFD-B706-98C86A25BEF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3CD386C-4572-4DFD-B706-98C86A25BEF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3CD386C-4572-4DFD-B706-98C86A25BEF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C69FDE91-25F8-4A25-AB27-1F14B4AF8F55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C69FDE91-25F8-4A25-AB27-1F14B4AF8F55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C69FDE91-25F8-4A25-AB27-1F14B4AF8F55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C69FDE91-25F8-4A25-AB27-1F14B4AF8F55}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C69FDE91-25F8-4A25-AB27-1F14B4AF8F55} = {0F9D1880-BFFB-4992-95D1-17604D62541C}
 	EndGlobalSection
 EndGlobal

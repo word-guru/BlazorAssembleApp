@@ -1,10 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MyShop.Domain.Repositories.Interface;
 using MyShop.Models;
-using MyShop.WebApi.Date;
-using MyShop.WebApi.GenericRepository;
-using MyShop.WebApi.Repositories.Interface;
 
-namespace MyShop.WebApi.Repositories;
+namespace MyShop.Data.Ef.Repositories;
 
 public class AccountRepository : EfRepository<Account>, IAccountRepository
 {

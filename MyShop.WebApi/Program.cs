@@ -1,20 +1,17 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MyShop.WebApi.Date;
-using MyShop.WebApi.GenericRepository;
-using MyShop.WebApi.GenericRepository.InterfaceGenericRepozitory;
-using MyShop.WebApi.Repositories;
-using MyShop.WebApi.Repositories.Interface;
-using MyShop.WebApi.Services;
+using MyShop.Data.Ef;
+using MyShop.Data.Ef.Repositories;
+using MyShop.Domain.Repositories.Interface;
+using MyShop.Domain.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var dbPath = "myapp.db";
+
 
 // AddProduct services to the container.
 
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseSqlite($"Data Source={dbPath}"));
-
 builder.Services.AddScoped(
     typeof(IGRepository<>), typeof(EfRepository<>));
 

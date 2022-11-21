@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MyShop.Exeptions;
+using MyShop.Domain.Exeptions;
+using MyShop.Domain.Repositories.Interface;
+using MyShop.Domain.Services;
 using MyShop.Models;
-using MyShop.WebApi.Repositories.Interface;
-using MyShop.WebApi.Services;
 
 namespace MyShop.WebApi.Controllers;
 
@@ -29,7 +29,7 @@ public class AccountController : ControllerBase
             return await _accountService.Register(account);
            
         }
-        catch (ExclusionOfEmailRegistration ex)
+        catch (EmailAlreadyExistException ex)
         {
             
             return BadRequest(new

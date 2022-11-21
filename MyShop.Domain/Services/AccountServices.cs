@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MyShop.Exeptions;
+﻿using MyShop.Domain.Exeptions;
+using MyShop.Domain.Repositories.Interface;
 using MyShop.Models;
-using MyShop.WebApi.Repositories.Interface;
 
-namespace MyShop.WebApi.Services;
+namespace MyShop.Domain.Services;
 
 public class AccountServices : IAccountServices
 {
@@ -14,7 +13,7 @@ public class AccountServices : IAccountServices
         _accountRepository = accountRepository;
     }
 
-    [HttpPost("register")]
+   // [HttpPost("register")]
     public async Task<Account> Register(Account account)
     {
         var existedAccount = await _accountRepository
@@ -23,7 +22,7 @@ public class AccountServices : IAccountServices
         var accountExist = existedAccount is not null;
         if (accountExist)
         {
-            throw new ExclusionOfEmailRegistration();
+            throw new EmailAlreadyExistException();
         }
 
         await _accountRepository.Add(account);

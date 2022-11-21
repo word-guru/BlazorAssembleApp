@@ -1,6 +1,6 @@
 ﻿using MyShop.Models;
 
-namespace MyShop.WebApi.Services;
+namespace MyShop.Domain.Services;
 
 public interface IAccountServices 
 {

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using MyShop.WebApi.Repository.Server;
 
-namespace MyShop.WebApi.Repository.Server.Controllers;
+namespace MyShop.WebApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
