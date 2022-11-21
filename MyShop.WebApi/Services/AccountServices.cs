@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyShop.Exeptions;
 using MyShop.Models;
-using MyShop.Server.Repository.Exeptions;
 using MyShop.WebApi.Repositories.Interface;
 
 namespace MyShop.WebApi.Services;

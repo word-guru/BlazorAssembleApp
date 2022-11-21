@@ -1,13 +1,11 @@
 ﻿@page "/catalog"
 @using MyShop.Server.Repository.Models
-@using MyShop.Server.Repository.BlazorClient.Data.Interface
-@using Blazored.Toast.Services
 @using MyShop.HttpApiClient
 @using MyShop.Models
 
 @inject IJSRuntime JS
 @inject IShopClient Client
-@inject IToastService toastService
+@inject IToastService Toast
 
 <h3>Список товаров</h3>
 
@@ -48,7 +46,7 @@
                     <button name="@product.Id"
                             class="btn btn-primary btn-success"
                             @onclick="@(() => { Client.AddToCart(AddCart(product));
-                                                  toastService.ShowSuccess("Товар добавлен в корзину", "Выполнено"); })"
+                                                  Toast.ShowSuccess("Товар добавлен в корзину", "Выполнено"); })"
                             type="submit">
                         Купить
                     </button>

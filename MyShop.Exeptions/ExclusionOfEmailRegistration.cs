@@ -1,4 +1,4 @@
-﻿namespace MyShop.Server.Repository.Exeptions;
+﻿namespace MyShop.Exeptions;
 
 [Serializable]
 public class ExclusionOfEmailRegistration : Exception

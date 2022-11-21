@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyShop.Exeptions;
 using MyShop.Models;
-using MyShop.Server.Repository.Exeptions;
 using MyShop.WebApi.Repositories.Interface;
 using MyShop.WebApi.Services;
 
@@ -29,12 +29,13 @@ public class AccountController : ControllerBase
             return await _accountService.Register(account);
            
         }
-        catch (ExclusionOfEmailRegistration)
+        catch (ExclusionOfEmailRegistration ex)
         {
             
             return BadRequest(new
             {
-                Message = "Такой Email уже зарегистрирован"
+                ex.Message,
+                account.Email
             });
         }
     }
