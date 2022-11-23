@@ -38,6 +38,21 @@ app.UseCors(policy =>
         .AllowCredentials();
 });
 
+app.Use(async (context, next) =>
+{
+    var userAgent = context.Request.Headers.UserAgent.ToString();
+    if (userAgent.Contains("Edg"))
+    {
+        await next();
+    }
+    else
+    {
+        context.Response.Headers.ContentType = "text/plain; charset=utf-8";
+        await context.Response.WriteAsync("Браузер не поддерживается. Используйте Edg!");
+        
+    }
+});
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -46,4 +61,5 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.MapControllers();
+
 app.Run();
