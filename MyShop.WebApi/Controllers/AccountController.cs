@@ -27,11 +27,9 @@ public class AccountController : ControllerBase
         try
         {
             return await _accountService.Register(account);
-           
         }
         catch (EmailAlreadyExistException ex)
         {
-            
             return BadRequest(new
             {
                 ex.Message,

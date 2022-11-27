@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MyShop.Data.Ef;
 using MyShop.Data.Ef.Repositories;
 using MyShop.Domain.Repositories.Interface;
 using MyShop.Domain.Services;
+using MyShop.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var dbPath = "myapp.db";
@@ -23,6 +25,10 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICartRepository, CartRepository>();
 builder.Services.AddScoped<IAccountServices, AccountServices>();
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+
+builder.Services.Configure<PasswordHasherOptions>(
+    opt => opt.IterationCount = 100_000); 
+builder.Services.AddSingleton<IPasswordHasher<Account>, PasswordHasher<Account>>();
 
 var app = builder.Build();
 
