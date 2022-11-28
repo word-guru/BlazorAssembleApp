@@ -44,4 +44,17 @@ public class AccountController : ControllerBase
         await _accountRepository.DeleteById(id);
         return Ok();
     }
+    
+    [HttpGet("authorization")]
+    public async Task<ActionResult<Account>> Authorization(Account account)
+    {
+        try
+        {
+            return account;
+        }
+        catch (Exception)
+        {
+            return Unauthorized();
+        }
+    }
 }

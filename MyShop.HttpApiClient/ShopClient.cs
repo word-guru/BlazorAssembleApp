@@ -116,17 +116,25 @@ public class ShopClient : IShopClient
        // response.EnsureSuccessStatusCode();
     }
 
-    // public async Task RegisterAccount(Account account)
+    // public async Task RegisterAccount(Account user)
     // {
-    //     var uri = $"{_host}/account/register";
-    //     var response = await _httpClient.PostAsJsonAsync(uri, account);
+    //     var uri = $"{_host}/user/register";
+    //     var response = await _httpClient.PostAsJsonAsync(uri, user);
     //     response.EnsureSuccessStatusCode();
     // }
 
-    public async Task RegisterAccount(User account)
+    public async Task RegisterAccount(User user)
     {
         var uri = $"{_host}/account/register";
-        var response = await _httpClient.PostAsJsonAsync(uri, account);
+        var response = await _httpClient.PostAsJsonAsync(uri, user);
+        response.EnsureSuccessStatusCode();
+    }
+    
+    public async Task Authorization(User user)
+    {
+        var uri = $"{_host}/account/authorization";
+        var response = await _httpClient.PostAsJsonAsync(uri, user);
+
         response.EnsureSuccessStatusCode();
     }
 }

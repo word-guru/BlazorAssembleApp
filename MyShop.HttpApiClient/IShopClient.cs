@@ -14,7 +14,8 @@ public interface IShopClient
     Task AddToCart(Cart cart);
     Task DeleteCart(long id);
     Task ClearCart();
-   // Task RegisterAccount(Account account);
-    Task RegisterAccount(User account);
-    
+   // Task RegisterAccount(Account user);
+    Task RegisterAccount(User user);
+    Task Authorization(User user);
+
 }

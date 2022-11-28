@@ -1,14 +1,15 @@
-﻿@page "/registration"
-@using MyShop.Models
+﻿@page "/login"
 @using MyShop.HttpApiClient
+@using Microsoft.AspNetCore.Components
+@using MyShop.Models
 
 @inject IShopClient Client
 @inject IToastService Toast
 @inject NavigationManager NavigationManager
 
-<h3>Регистрация в системе</h3>
+<h3>Вход в систему</h3>
 
-<EditForm Model="_model" OnValidSubmit="Register">
+<EditForm Model="_model" OnValidSubmit="LoginUser">
     <FluentValidationValidator/>
     <table>
         <tr>
@@ -24,31 +25,25 @@
             <td><InputText type="password" class="form-control" @bind-Value="_model.Password"/></td>
         </tr>
         <tr><td class="row-cols-2"><ValidationSummary/></td></tr>
-        <tr><input type="submit" class="btn btn-primary btn-block mr-2" value="Зарегестрироваться"/></tr>
-        <tr><input type="button" class="btn btn-secondary btn-block mr-2" onclick="@GoToLogin" value="Войти"/></tr>
+        <tr><input type="submit" class="btn btn-primary btn-block mr-2" value="Войти"/></tr>
+        <tr><input type="button" class="btn btn-secondary btn-block mr-2" onclick="@GoToRegister" value="Зарегестрироваться"/></tr>
 
     </table>
 </EditForm>
-
-
-@if (_registered)
-{
-  Toast.ShowInfo("Вы успешно зарегестрированны!");
-}
 
 @code {
     private readonly User _model = new();
     private bool _registered = false;
     
 
-    private async Task Register()
+    private async Task LoginUser()
     {
         await Client.RegisterAccount(_model);
-        //NavigationManager - перенаправить
+    //NavigationManager - перенаправить
         _registered = true;
     }
-    private void GoToLogin()
+    private void GoToRegister()
     {
-        NavigationManager.NavigateTo("/login");
+        NavigationManager.NavigateTo("/register");
     }
 }
