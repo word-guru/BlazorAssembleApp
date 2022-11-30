@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Json;
 using MyShop.Models;
+using MyShop.Models.Requests;
 using MyShop.Server.Repository.Models;
 
 namespace MyShop.HttpApiClient;
@@ -123,14 +124,14 @@ public class ShopClient : IShopClient
     //     response.EnsureSuccessStatusCode();
     // }
 
-    public async Task RegisterAccount(User user)
+    public async Task RegisterAccount(RegisterRequest user)
     {
         var uri = $"{_host}/account/register";
         var response = await _httpClient.PostAsJsonAsync(uri, user);
         response.EnsureSuccessStatusCode();
     }
     
-    public async Task Authorization(User user)
+    public async Task Authorization(LogInRequest user)
     {
         var uri = $"{_host}/account/authorization";
         var response = await _httpClient.PostAsJsonAsync(uri, user);

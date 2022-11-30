@@ -3,6 +3,7 @@ using MyShop.Domain.Exeptions;
 using MyShop.Domain.Repositories.Interface;
 using MyShop.Domain.Services;
 using MyShop.Models;
+using MyShop.Models.Requests;
 
 namespace MyShop.WebApi.Controllers;
 
@@ -22,18 +23,18 @@ public class AccountController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<ActionResult<Account>> Register(Account account) //[FromBody]
+    public async Task<ActionResult<Account>> Register(RegisterRequest model) //[FromBody]
     {
         try
         {
-            return await _accountService.Register(account);
+            return await _accountService.Register(model.Email,model.Name,model.Password);
         }
         catch (EmailAlreadyExistException ex)
         {
             return BadRequest(new
             {
                 ex.Message,
-                account.Email
+                model.Email
             });
         }
     }
@@ -45,16 +46,22 @@ public class AccountController : ControllerBase
         return Ok();
     }
     
-    [HttpGet("authorization")]
-    public async Task<ActionResult<Account>> Authorization(Account account)
+    [HttpPost("login")]
+    public async Task<ActionResult<Account>> LogIn(Account model)
     {
         try
         {
-            return account;
+            return  await _accountService.LogIn(model.Email, model.Password);
+             
         }
-        catch (Exception)
+        catch (IncorrectPasswordException ex)
         {
-            return Unauthorized();
+            return BadRequest(new
+            {
+                ex.Message,
+                model.Password
+            });
         }
-    }
+    }    
+    
 }

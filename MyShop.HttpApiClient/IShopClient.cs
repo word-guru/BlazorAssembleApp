@@ -1,4 +1,5 @@
 ﻿using MyShop.Models;
+using MyShop.Models.Requests;
 using MyShop.Server.Repository.Models;
 
 namespace MyShop.HttpApiClient;
@@ -15,7 +16,7 @@ public interface IShopClient
     Task DeleteCart(long id);
     Task ClearCart();
    // Task RegisterAccount(Account user);
-    Task RegisterAccount(User user);
-    Task Authorization(User user);
+    Task RegisterAccount(RegisterRequest user);
+    Task Authorization(LogInRequest user);
 
 }

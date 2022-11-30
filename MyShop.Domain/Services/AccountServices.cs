@@ -9,19 +9,23 @@ namespace MyShop.Domain.Services;
 public class AccountServices : IAccountServices
 {
     private readonly IAccountRepository _accountRepository;
-    private readonly IPasswordHasher<User> _hasher;
+    private readonly IPasswordHasher<Account> _hasher;
 
-    public AccountServices(IAccountRepository accountRepository,IPasswordHasher<User> hasher)
+    public AccountServices(IAccountRepository accountRepository, IPasswordHasher<Account> hasher)
     {
         _accountRepository = accountRepository;
         _hasher = hasher;
     }
 
-   // [HttpPost("register")]
-    public async Task<Account> Register(Account account)
+    // [HttpPost("register")]
+    public async Task<Account> Register(string email, string name, string password)
     {
-        string hashedPassword = _hasher.HashPassword(new User(), account.Password);
-        account.Password = hashedPassword;
+        Account account = new()
+        {
+            Id = Guid.NewGuid(),
+            Name = name,
+            Email = email
+        };
 
         var existedAccount = await _accountRepository
             .FindByEmail(account.Email);
@@ -32,21 +36,23 @@ public class AccountServices : IAccountServices
             throw new EmailAlreadyExistException();
         }
 
+        string hashedPassword = _hasher.HashPassword(account, password);
+        account.Password = hashedPassword;
+
         await _accountRepository.Add(account);
         return account;
     }
-    
-    public async Task<Account> Authorization(Account account)
-    {
-        var passwordHash = _hasher.HashPassword(new User(), account.Password);
 
-        PasswordVerificationResult result = _hasher.VerifyHashedPassword(
-            new User(), passwordHash, account.Password);
-        
-        if (result == PasswordVerificationResult.Failed)
-        {
-            
-        }
+    public async Task<Account> LogIn(string email, string password)
+    {
+        var account = await _accountRepository.FindByEmail(email);
+        if (account == null) throw new EmailAlreadyExistException();
+
+        if (_hasher.VerifyHashedPassword(account, account.Password, password)
+            == PasswordVerificationResult.Failed)
+
+            throw new IncorrectPasswordException();
+
 
         return account;
     }

@@ -1,6 +1,7 @@
 ﻿@page "/registration"
 @using MyShop.Models
 @using MyShop.HttpApiClient
+@using MyShop.Models.Requests
 
 @inject IShopClient Client
 @inject IToastService Toast
@@ -13,19 +14,31 @@
     <table>
         <tr>
             <td>Имя</td>
-            <td><InputText type="text" class="form-control" @bind-Value="_model.Name"/></td>
+            <td>
+                <InputText type="text" class="form-control" @bind-Value="_model.Name"/>
+            </td>
         </tr>
         <tr>
-            <td>Email</td>
-            <td><InputText type="email" class="form-control" @bind-Value="_model.Email"/></td>
+            <td>Почта</td>
+            <td>
+                <InputText type="email" class="form-control" @bind-Value="_model.Email"/>
+            </td>
         </tr>
         <tr>
-            <td>Password</td>
-            <td><InputText type="password" class="form-control" @bind-Value="_model.Password"/></td>
+            <td>Пароль</td>
+            <td>
+                <InputText type="password" class="form-control" @bind-Value="_model.Password"/>
+            </td>
         </tr>
-        <tr><td class="row-cols-2"><ValidationSummary/></td></tr>
-        <tr><input type="submit" class="btn btn-primary btn-block mr-2" value="Зарегестрироваться"/></tr>
-        <tr><input type="button" class="btn btn-secondary btn-block mr-2" @onclick="GoToLogin" value="Войти"/></tr>
+        <tr>
+            <td class="row-cols-2">
+                <ValidationSummary/>
+            </td>
+        </tr>
+        <tr>
+            <input type="submit" class="btn btn-primary btn-block mr-2" value="Зарегестрироваться"/>
+            <input type="button" class="btn btn-secondary btn-block mr-2" @onclick="GoToLogin" value="Войти"/>
+        </tr>
 
     </table>
 </EditForm>
@@ -33,22 +46,24 @@
 
 @if (_registered)
 {
-  Toast.ShowInfo("Вы успешно зарегестрированны!");
+    Toast.ShowInfo("Вы успешно зарегестрированны!");
 }
 
 @code {
-    private readonly User _model = new();
+    private readonly RegisterRequest _model = new();
     private bool _registered = false;
-    
+
 
     private async Task Register()
     {
         await Client.RegisterAccount(_model);
-        //NavigationManager - перенаправить
+        NavigationManager.NavigateTo("login");
         _registered = true;
     }
+
     private void GoToLogin()
     {
         NavigationManager.NavigateTo("login");
     }
+
 }

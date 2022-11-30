@@ -3,7 +3,6 @@
 [Serializable]
 public class EmailAlreadyExistException : Exception
 {
-
     public EmailAlreadyExistException(string? message = null)
         : base(message) { }
 }

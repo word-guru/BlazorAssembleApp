@@ -2,6 +2,7 @@
 @using MyShop.HttpApiClient
 @using Microsoft.AspNetCore.Components
 @using MyShop.Models
+@using MyShop.Models.Requests
 
 @inject IShopClient Client
 @inject IToastService Toast
@@ -12,38 +13,56 @@
 <EditForm Model="_model" OnValidSubmit="LoginUser">
     <FluentValidationValidator/>
     <table>
-        <tr>
-            <td>Имя</td>
-            <td><InputText type="text" class="form-control" @bind-Value="_model.Name"/></td>
-        </tr>
+
         <tr>
             <td>Email</td>
-            <td><InputText type="email" class="form-control" @bind-Value="_model.Email"/></td>
+            <td>
+                <InputText type="email" class="form-control" @bind-Value="_model.Email"/>
+            </td>
         </tr>
         <tr>
             <td>Password</td>
-            <td><InputText type="password" class="form-control" @bind-Value="_model.Password"/></td>
+            <td>
+                <InputText type="password" text="password" class="form-control" @bind-Value="_model.Password"/>
+            </td>
         </tr>
-        <tr><td class="row-cols-2"><ValidationSummary/></td></tr>
-        <tr><input type="submit" class="btn btn-primary btn-block mr-2" value="Войти"/></tr>
-        <tr><input type="button" class="btn btn-secondary btn-block mr-2" @onclick="GoToRegister" value="Зарегестрироваться"/></tr>
+        <tr>
+            <td class="row-cols-2">
+                <ValidationSummary/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" class="btn btn-primary btn-block mr-2" value="Войти"/>
+            </td>
+            <td>
+                <input type="button" class="btn btn-secondary btn-block mr-2" @onclick="GoToRegister" value="Зарегестрироваться"/>
+            </td>
+        </tr>
 
     </table>
 </EditForm>
 
+@if (_auth)
+{
+    Toast.ShowSuccess("Вы успешно авторизованы!");
+}
+
 @code {
-    private readonly User _model = new();
-    private bool _registered = false;
-    
+    private readonly LogInRequest _model = new();
+    private bool _auth = false;
+
 
     private async Task LoginUser()
     {
-        await Client.RegisterAccount(_model);
-    //NavigationManager - перенаправить
-        _registered = true;
+        await Client.Authorization(_model);
+        NavigationManager.NavigateTo("/catalog");
+        _auth = true;
     }
+
     private void GoToRegister()
     {
-        NavigationManager.NavigateTo("/register");
+        NavigationManager.NavigateTo("/registration");
     }
+
 }

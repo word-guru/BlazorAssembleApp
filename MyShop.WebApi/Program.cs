@@ -28,7 +28,7 @@ builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 
 builder.Services.Configure<PasswordHasherOptions>(
     opt => opt.IterationCount = 100_000); 
-builder.Services.AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>();
+builder.Services.AddSingleton<IPasswordHasher<Account>, PasswordHasher<Account>>();
 
 var app = builder.Build();
 

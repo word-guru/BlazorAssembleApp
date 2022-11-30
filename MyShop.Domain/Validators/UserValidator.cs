@@ -1,9 +1,10 @@
 ﻿using FluentValidation;
 using MyShop.Models;
+using MyShop.Models.Requests;
 
 namespace MyShop.Domain.Validators;
 
-public class UserValidator : AbstractValidator<User>
+public class UserValidator : AbstractValidator<RegisterRequest>
 {
     public UserValidator()
     {
