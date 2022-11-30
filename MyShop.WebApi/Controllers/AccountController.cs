@@ -47,7 +47,7 @@ public class AccountController : ControllerBase
     }
     
     [HttpPost("login")]
-    public async Task<ActionResult<Account>> LogIn(Account model)
+    public async Task<ActionResult<Account>> LogIn(LogInRequest model)
     {
         try
         {

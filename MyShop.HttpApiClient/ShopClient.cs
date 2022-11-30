@@ -133,7 +133,7 @@ public class ShopClient : IShopClient
     
     public async Task Authorization(LogInRequest user)
     {
-        var uri = $"{_host}/account/authorization";
+        var uri = $"{_host}/account/login";
         var response = await _httpClient.PostAsJsonAsync(uri, user);
 
         response.EnsureSuccessStatusCode();

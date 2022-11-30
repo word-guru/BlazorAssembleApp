@@ -46,13 +46,14 @@ public class AccountServices : IAccountServices
     public async Task<Account> LogIn(string email, string password)
     {
         var account = await _accountRepository.FindByEmail(email);
-        if (account == null) throw new EmailAlreadyExistException();
+        // if (account == null) 
+        //     throw new EmailAlreadyExistException();
 
         if (_hasher.VerifyHashedPassword(account, account.Password, password)
             == PasswordVerificationResult.Failed)
-
+        {
             throw new IncorrectPasswordException();
-
+        }
 
         return account;
     }
