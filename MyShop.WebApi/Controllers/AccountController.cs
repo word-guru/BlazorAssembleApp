@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MyShop.Domain.Exeptions;
+using MyShop.Domain.Exceptions;
 using MyShop.Domain.Repositories.Interface;
 using MyShop.Domain.Services;
 using MyShop.Models;
@@ -47,11 +47,12 @@ public class AccountController : ControllerBase
     }
     
     [HttpPost("login")]
-    public async Task<ActionResult<Account>> LogIn(LogInRequest model)
+    public async Task<ActionResult<LoginResponse>> LogIn(LogInRequest request)
     {
-        try
+        var (account, token) = await _accountService.LogIn(request.Email, request.Password);
+        /*try
         {
-            return  await _accountService.LogIn(model.Email, model.Password);
+            return  await _accountService.LogIn(request.Email, request.Password);
              
         }
         catch (IncorrectPasswordException ex)
@@ -59,9 +60,10 @@ public class AccountController : ControllerBase
             return BadRequest(new
             {
                 ex.Message,
-                model.Password
+                request.Password
             });
-        }
+        }*/
+
     }    
     
 }

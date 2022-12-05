@@ -1,19 +1,53 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using MyShop.Data.Ef;
 using MyShop.Data.Ef.Repositories;
 using MyShop.Domain.Repositories.Interface;
 using MyShop.Domain.Services;
 using MyShop.Models;
+using MyShop.WebApi.Repository.Server.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 var dbPath = "myapp.db";
+
+JwtConfig jwtConfig = builder.Configuration
+    .GetSection("JwtConfig")
+    .Get<JwtConfig>();
+builder.Services.AddSingleton(jwtConfig);
+
 
 
 // AddProduct services to the container.
 
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseSqlite($"Data Source={dbPath}"));
+
+builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            IssuerSigningKey = new SymmetricSecurityKey(jwtConfig.SigningKeyBytes),
+            ValidateIssuerSigningKey = true,
+            ValidateLifetime = true,
+            RequireExpirationTime = true,
+            RequireSignedTokens = true,
+          
+            ValidateAudience = true,
+            ValidateIssuer = true,
+            ValidAudiences = new[] { jwtConfig.Audience },
+            ValidIssuer = jwtConfig.Issuer
+        };
+    });
+builder.Services.AddAuthorization();
+
 builder.Services.AddScoped(
     typeof(IGRepository<>), typeof(EfRepository<>));
 
@@ -66,6 +100,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();

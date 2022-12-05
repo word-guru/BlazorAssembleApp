@@ -1,6 +1,5 @@
-﻿using System.Linq.Expressions;
-using Microsoft.AspNetCore.Identity;
-using MyShop.Domain.Exeptions;
+﻿using Microsoft.AspNetCore.Identity;
+using MyShop.Domain.Exceptions;
 using MyShop.Domain.Repositories.Interface;
 using MyShop.Models;
 
@@ -13,8 +12,8 @@ public class AccountServices : IAccountServices
 
     public AccountServices(IAccountRepository accountRepository, IPasswordHasher<Account> hasher)
     {
-        _accountRepository = accountRepository;
-        _hasher = hasher;
+        _accountRepository = accountRepository ?? throw new ArgumentNullException(nameof(accountRepository));
+        _hasher = hasher ?? throw new ArgumentNullException(nameof(hasher)); //!
     }
 
     // [HttpPost("register")]
@@ -43,18 +42,25 @@ public class AccountServices : IAccountServices
         return account;
     }
 
-    public async Task<Account> LogIn(string email, string password)
+    public async Task<(Account account,string token)> LogIn(string email, string password)
     {
-        var account = await _accountRepository.FindByEmail(email);
-        // if (account == null) 
-        //     throw new EmailAlreadyExistException();
+        
+        Account? account = await _accountRepository.FindByEmail(email);
+        if (account is null)
+        {
+            throw new EmailUnregisteredException();
+        }
 
-        if (_hasher.VerifyHashedPassword(account, account.Password, password)
-            == PasswordVerificationResult.Failed)
+        var result = _hasher.VerifyHashedPassword(account, account.Password, password);
+
+        if (result == PasswordVerificationResult.Failed)
         {
             throw new IncorrectPasswordException();
         }
 
-        return account;
+        string token = _tokenService.Generate(account);
+
+        return (account,token);
     }
 }
+
