@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MyShop.HttpModels;
 
-namespace MyShop.Models;
+namespace MyShop.Domain.Entites;
 
 public record Account : IEntity
 {

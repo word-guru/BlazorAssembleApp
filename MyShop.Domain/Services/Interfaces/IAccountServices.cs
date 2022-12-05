@@ -1,4 +1,5 @@
-﻿using MyShop.Models;
+﻿using MyShop.Domain.Entites;
+using MyShop.HttpModels;
 
 namespace MyShop.Domain.Services.Interfaces;
 

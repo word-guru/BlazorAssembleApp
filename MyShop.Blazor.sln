@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShop.WebApi", "MyShop.Web
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShop.HttpApiClient", "MyShop.HttpApiClient\MyShop.HttpApiClient.csproj", "{68B30A44-B470-48C4-9FC4-C0A2EFC4ADE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShop.Models", "MyShop.Models\MyShop.Models.csproj", "{8E53FC35-9A49-4DA9-AB2B-B8443ED47808}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShop.HttpModels", "MyShop.HttpModels\MyShop.HttpModels.csproj", "{8E53FC35-9A49-4DA9-AB2B-B8443ED47808}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShop.Domain", "MyShop.Domain\MyShop.Domain.csproj", "{A3CD386C-4572-4DFD-B706-98C86A25BEF7}"
 EndProject

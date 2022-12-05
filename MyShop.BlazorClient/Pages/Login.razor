@@ -1,16 +1,18 @@
 ﻿@page "/login"
 @using MyShop.HttpApiClient
 @using Microsoft.AspNetCore.Components
-@using MyShop.Models
-@using MyShop.Models.Requests
+@using MyShop.HttpModels
+@using MyShop.HttpModels.Requests
+@using Blazored.LocalStorage
 
 @inject IShopClient Client
 @inject IToastService Toast
 @inject NavigationManager NavigationManager
+@inject ILocalStorageService _localStorage
 
 <h3>Вход в систему</h3>
 
-<EditForm Model="_model" OnValidSubmit="LoginUser">
+<EditForm Model="_model" OnValidSubmit="LogIn">
     <FluentValidationValidator/>
     <table>
 
@@ -53,11 +55,22 @@
     private bool _auth = false;
 
 
-    private async Task LoginUser()
+    /*private async Task LoginUser()
     {
         await Client.GetLogIn(_model);
         //NavigationManager.NavigateTo("/catalog");
         _auth = true;
+    }*/
+
+    private async Task LogIn()
+    {
+       var response =  await Client.LogIn(_model);
+        _auth = true;
+        
+        await _localStorage.SetItemAsync("token", response.Token);
+
+       var current  = await Client.GetCurrentAccount();
+        Toast.ShowSuccess(current.ToString());
     }
 
     private void GoToRegister()

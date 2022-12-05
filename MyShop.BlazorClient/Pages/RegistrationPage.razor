@@ -1,11 +1,13 @@
 ﻿@page "/registration"
-@using MyShop.Models
+@using MyShop.HttpModels
 @using MyShop.HttpApiClient
-@using MyShop.Models.Requests
+@using MyShop.HttpModels.Requests
+@using Blazored.LocalStorage
 
 @inject IShopClient Client
 @inject IToastService Toast
 @inject NavigationManager NavigationManager
+@inject ILocalStorageService LocalStorage
 
 <h3>Регистрация в системе</h3>
 

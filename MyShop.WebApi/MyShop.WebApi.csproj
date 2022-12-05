@@ -23,7 +23,7 @@
     
       <ProjectReference Include="..\MyShop.Domain\MyShop.Domain.csproj" />
     
-      <ProjectReference Include="..\MyShop.Models\MyShop.Models.csproj" />
+      <ProjectReference Include="..\MyShop.HttpModels\MyShop.HttpModels.csproj" />
     
       <ProjectReference Include="..\MyShop.HttpApiClient\MyShop.HttpApiClient.csproj" />
     </ItemGroup>

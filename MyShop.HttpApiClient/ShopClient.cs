@@ -1,7 +1,8 @@
-﻿using System.Net.Http.Json;
-using MyShop.Models;
-using MyShop.Models.Requests;
-using MyShop.Server.Repository.Models;
+﻿using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using MyShop.Domain.Entites;
+using MyShop.HttpModels.Requests;
+using MyShop.HttpModels.Responses;
 
 namespace MyShop.HttpApiClient;
 
@@ -131,16 +132,38 @@ public class ShopClient : IShopClient
         response.EnsureSuccessStatusCode();
     }
 
-    public Task<Account> GetLogIn(LogInRequest user)
+   /* public async Task<Account> GetLogIn(LogInRequest user)
     {
-        throw new NotImplementedException();
-    }
+        var uri = $"{_host}/account/register";
+        var response = await _httpClient.PostAsJsonAsync(uri, user);
+        response.EnsureSuccessStatusCode();
+    }*/
 
-    public async Task Authorization(LogInRequest user)
+    public async Task<LogInResponse> LogIn(LogInRequest user)
     {
-        var uri = $"{_host}/account/authorization";
+        var uri = $"{_host}/account/login";
         var response = await _httpClient.PostAsJsonAsync(uri, user);
 
         response.EnsureSuccessStatusCode();
+         var logInResponse = await response.Content.ReadFromJsonAsync<LogInResponse>();
+         
+         SetAuthorizationToken(logInResponse!.Token);
+        
+        return  logInResponse!;
+    }
+    
+    public void SetAuthorizationToken(string token)
+    {
+        if (token == null) throw new ArgumentNullException(nameof(token));
+        var header = new AuthenticationHeaderValue("Bearer", token);
+        _httpClient.DefaultRequestHeaders.Authorization = header;
+       // IsAuthorizationTokenSet = true;
+    }
+
+    public async Task<AccountInfoResponse> GetCurrentAccount()
+    {
+        var uri = $"{_host}/account/get_info";
+        var response = await _httpClient.GetFromJsonAsync<AccountInfoResponse>(uri);
+        return response!;
     }
 }

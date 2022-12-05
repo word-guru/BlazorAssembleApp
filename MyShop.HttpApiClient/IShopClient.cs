@@ -1,6 +1,6 @@
-﻿using MyShop.Models;
-using MyShop.Models.Requests;
-using MyShop.Server.Repository.Models;
+﻿using MyShop.Domain.Entites;
+using MyShop.HttpModels.Requests;
+using MyShop.HttpModels.Responses;
 
 namespace MyShop.HttpApiClient;
 
@@ -17,7 +17,8 @@ public interface IShopClient
     Task ClearCart();
    // Task RegisterAccount(Account user);
     Task RegisterAccount(RegisterRequest user);
-    Task<Account> GetLogIn(LogInRequest user);
-    Task Authorization(LogInRequest user);
+    //Task<Account> GetLogIn(LogInRequest user);
+    Task<LogInResponse> LogIn(LogInRequest user);
+    Task<AccountInfoResponse> GetCurrentAccount();
 
 }

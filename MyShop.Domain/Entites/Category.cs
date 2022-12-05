@@ -1,6 +1,6 @@
-﻿using MyShop.Models;
+﻿using MyShop.HttpModels;
 
-namespace MyShop.Server.Repository.Models;
+namespace MyShop.Domain.Entites;
 
 public class Category : IEntity
 {

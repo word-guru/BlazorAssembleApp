@@ -1,3 +1,4 @@
+using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MyShop.Server.Repository.BlazorClient.Data;
@@ -7,12 +8,14 @@ using FluentValidation;
 using MyShop.BlazorClient;
 using MyShop.Domain.Validators;
 using MyShop.HttpApiClient;
-using MyShop.Models;
+using MyShop.HttpModels;
 
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
+
+builder.Services.AddBlazoredLocalStorage();
 
 builder.Services.AddScoped<IShopClient, ShopClient>();//7004 7203
 

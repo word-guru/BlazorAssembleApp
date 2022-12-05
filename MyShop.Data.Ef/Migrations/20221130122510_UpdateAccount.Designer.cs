@@ -20,7 +20,7 @@ namespace MyShop.Data.Ef.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
 
-            modelBuilder.Entity("MyShop.Models.Account", b =>
+            modelBuilder.Entity("MyShop.HttpModels.Account", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,7 +46,7 @@ namespace MyShop.Data.Ef.Migrations
                     b.ToTable("Accounts");
                 });
 
-            modelBuilder.Entity("MyShop.Models.Product", b =>
+            modelBuilder.Entity("MyShop.HttpModels.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

@@ -1,4 +1,4 @@
-﻿using MyShop.Server.Repository.Models;
+﻿using MyShop.Domain.Entites;
 
 namespace MyShop.Domain.Repositories.Interface;
 

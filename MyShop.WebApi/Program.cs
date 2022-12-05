@@ -5,11 +5,13 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MyShop.Data.Ef;
 using MyShop.Data.Ef.Repositories;
+using MyShop.Domain.Entites;
 using MyShop.Domain.Repositories.Interface;
 using MyShop.Domain.Services;
 using MyShop.Domain.Services.Interfaces;
-using MyShop.Models;
+using MyShop.HttpModels;
 using MyShop.WebApi.Configurations;
+using MyShop.WebApi.Sevices;
 
 var builder = WebApplication.CreateBuilder(args);
 var dbPath = "myapp.db";
@@ -29,13 +31,13 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Name = "Authorization",
+        Name = "LogIn",
         Type = SecuritySchemeType.ApiKey,
         Scheme = "Bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
         Description =
-            "JWT Authorization header using the Bearer scheme. " +
+            "JWT LogIn header using the Bearer scheme. " +
             "\r\n\r\n Enter 'Bearer' [space] and then your token in the text input below." +
             "\r\n\r\nExample: \"Bearer 1safsfsdfdfd\""
     });
@@ -90,6 +92,7 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICartRepository, CartRepository>();
 builder.Services.AddScoped<IAccountServices, AccountServices>();
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<ITokenService, JwtTokenService>();
 
 builder.Services.Configure<PasswordHasherOptions>(
     opt => opt.IterationCount = 100_000);
@@ -109,7 +112,7 @@ app.UseCors(policy =>
         .AllowCredentials();
 });
 
-app.Use(async (context, next) =>
+/*app.Use(async (context, next) =>
 {
     var userAgent = context.Request.Headers.UserAgent.ToString();
     if (userAgent.Contains("Edg"))
@@ -121,7 +124,7 @@ app.Use(async (context, next) =>
         context.Response.Headers.ContentType = "text/plain; charset=utf-8";
         await context.Response.WriteAsync("Браузер не поддерживается. Используйте Edg!");
     }
-});
+});*/
 
 if (app.Environment.IsDevelopment())
 {

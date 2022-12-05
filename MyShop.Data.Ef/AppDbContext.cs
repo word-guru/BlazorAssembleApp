@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MyShop.Models;
-using MyShop.Server.Repository.Models;
+using MyShop.Domain.Entites;
 
 namespace MyShop.Data.Ef;
 

@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using MyShop.Domain.Entites;
 using MyShop.Domain.Exeptions;
 using MyShop.Domain.Repositories.Interface;
 using MyShop.Domain.Services.Interfaces;
-using MyShop.Models;
+using MyShop.HttpModels;
 
 namespace MyShop.Domain.Services;
 

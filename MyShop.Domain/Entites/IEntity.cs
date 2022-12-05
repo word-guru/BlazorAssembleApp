@@ -1,4 +1,4 @@
-﻿namespace MyShop.Models;
+﻿namespace MyShop.Domain.Entites;
 
 public interface IEntity
 {

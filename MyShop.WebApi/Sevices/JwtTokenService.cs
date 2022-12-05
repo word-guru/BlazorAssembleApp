@@ -1,8 +1,12 @@
-﻿using System.Security.Claims;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using MyShop.Domain.Entites;
 using MyShop.Domain.Services.Interfaces;
-using MyShop.Models;
+using MyShop.HttpModels;
+using MyShop.WebApi.Configurations;
 
-namespace MyShop.Domain.Services;
+namespace MyShop.WebApi.Sevices;
 
 public class JwtTokenService : ITokenService
 {

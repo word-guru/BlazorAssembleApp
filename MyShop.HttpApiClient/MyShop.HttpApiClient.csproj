@@ -8,7 +8,9 @@
 
     <ItemGroup><!--      <ProjectReference Include="..\MyShopBlazor.App\MyShopBlazor.App.csproj" />-->
     
-      <ProjectReference Include="..\MyShop.Models\MyShop.Models.csproj" />
+      <ProjectReference Include="..\MyShop.Domain\MyShop.Domain.csproj" />
+    
+      <ProjectReference Include="..\MyShop.HttpModels\MyShop.HttpModels.csproj" />
     </ItemGroup>
 
 </Project>

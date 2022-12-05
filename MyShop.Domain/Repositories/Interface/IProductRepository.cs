@@ -1,5 +1,5 @@
-﻿using MyShop.Models;
-using MyShop.Server.Repository.Models;
+﻿using MyShop.Domain.Entites;
+using MyShop.HttpModels;
 
 namespace MyShop.Domain.Repositories.Interface;
 

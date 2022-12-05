@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using MyShop.Domain.Entites;
 using MyShop.Domain.Exeptions;
 using MyShop.Domain.Repositories.Interface;
 using MyShop.Domain.Services;
 using MyShop.Domain.Services.Interfaces;
-using MyShop.Models;
-using MyShop.Models.Requests;
-using MyShop.Models.Responses;
+using MyShop.HttpModels;
+using MyShop.HttpModels.Requests;
+using MyShop.HttpModels.Responses;
 
 namespace MyShop.WebApi.Controllers;
 
@@ -48,24 +51,33 @@ public class AccountController : ControllerBase
         return Ok();
     }
     
+   
     [HttpPost("login")]
     public async Task<ActionResult<LogInResponse>> LogIn(LogInRequest request)
     {
-        
         try
         {
             var (account, token) = await _accountService.LogIn(request.Email, request.Password);
-            return new LogInResponse { AccountIn = account, Token = token };
+            return new LogInResponse { Id = account.Id, Token = token };
         }
         catch (EmailUnregisteredException)
         {
-            return new LogInResponse();
+            return BadRequest(new {Message = "Такой Email не зарегестрирован"});
         }
         catch (IncorrectPasswordException)
         {
-            return new LogInResponse();
+            return BadRequest(new {Message = "Пароль не совпадает"});
         }
 
-    }    
+    }
+    [Authorize]
+    [HttpGet("get_info")]
+    public async Task<ActionResult<AccountInfoResponse>> GetAccountInfo()
+    {
+        var strId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var guid = Guid.Parse(strId);
+        var account = await _accountRepository.GetById(guid);
+        return new AccountInfoResponse(guid, account.Name, account.Email);
+    }
     
 }

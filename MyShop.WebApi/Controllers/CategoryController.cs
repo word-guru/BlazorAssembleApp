@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyShop.Domain.Entites;
 using MyShop.Domain.Repositories.Interface;
-using MyShop.Server.Repository.Models;
 
 namespace MyShop.WebApi.Controllers;
 

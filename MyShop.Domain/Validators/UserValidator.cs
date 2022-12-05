@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
-using MyShop.Models;
-using MyShop.Models.Requests;
+using MyShop.HttpModels;
+using MyShop.HttpModels.Requests;
 
 namespace MyShop.Domain.Validators;
 
