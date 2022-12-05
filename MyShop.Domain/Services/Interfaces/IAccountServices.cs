@@ -1,6 +1,6 @@
 ﻿using MyShop.Models;
 
-namespace MyShop.Domain.Services;
+namespace MyShop.Domain.Services.Interfaces;
 
 public interface IAccountServices 
 {

@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MyShop.Domain.Exceptions;
+using MyShop.Domain.Exeptions;
 using MyShop.Domain.Repositories.Interface;
 using MyShop.Domain.Services;
+using MyShop.Domain.Services.Interfaces;
 using MyShop.Models;
 using MyShop.Models.Requests;
+using MyShop.Models.Responses;
 
 namespace MyShop.WebApi.Controllers;
 
@@ -47,22 +49,22 @@ public class AccountController : ControllerBase
     }
     
     [HttpPost("login")]
-    public async Task<ActionResult<LoginResponse>> LogIn(LogInRequest request)
+    public async Task<ActionResult<LogInResponse>> LogIn(LogInRequest request)
     {
-        var (account, token) = await _accountService.LogIn(request.Email, request.Password);
-        /*try
+        
+        try
         {
-            return  await _accountService.LogIn(request.Email, request.Password);
-             
+            var (account, token) = await _accountService.LogIn(request.Email, request.Password);
+            return new LogInResponse { AccountIn = account, Token = token };
         }
-        catch (IncorrectPasswordException ex)
+        catch (EmailUnregisteredException)
         {
-            return BadRequest(new
-            {
-                ex.Message,
-                request.Password
-            });
-        }*/
+            return new LogInResponse();
+        }
+        catch (IncorrectPasswordException)
+        {
+            return new LogInResponse();
+        }
 
     }    
     

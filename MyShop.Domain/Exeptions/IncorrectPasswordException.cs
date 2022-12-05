@@ -1,4 +1,4 @@
-﻿namespace MyShop.Domain.Exceptions;
+﻿namespace MyShop.Domain.Exeptions;
 
 public class IncorrectPasswordException : Exception
 {

@@ -2,12 +2,14 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using MyShop.Data.Ef;
 using MyShop.Data.Ef.Repositories;
 using MyShop.Domain.Repositories.Interface;
 using MyShop.Domain.Services;
+using MyShop.Domain.Services.Interfaces;
 using MyShop.Models;
-using MyShop.WebApi.Repository.Server.Configurations;
+using MyShop.WebApi.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 var dbPath = "myapp.db";
@@ -18,11 +20,40 @@ JwtConfig jwtConfig = builder.Configuration
 builder.Services.AddSingleton(jwtConfig);
 
 
-
 // AddProduct services to the container.
 
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseSqlite($"Data Source={dbPath}"));
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description =
+            "JWT Authorization header using the Bearer scheme. " +
+            "\r\n\r\n Enter 'Bearer' [space] and then your token in the text input below." +
+            "\r\n\r\nExample: \"Bearer 1safsfsdfdfd\""
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
+});
 
 builder.Services.AddAuthentication(options =>
     {
@@ -39,7 +70,7 @@ builder.Services.AddAuthentication(options =>
             ValidateLifetime = true,
             RequireExpirationTime = true,
             RequireSignedTokens = true,
-          
+
             ValidateAudience = true,
             ValidateIssuer = true,
             ValidAudiences = new[] { jwtConfig.Audience },
@@ -61,7 +92,7 @@ builder.Services.AddScoped<IAccountServices, AccountServices>();
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 
 builder.Services.Configure<PasswordHasherOptions>(
-    opt => opt.IterationCount = 100_000); 
+    opt => opt.IterationCount = 100_000);
 builder.Services.AddSingleton<IPasswordHasher<Account>, PasswordHasher<Account>>();
 
 var app = builder.Build();
@@ -89,7 +120,6 @@ app.Use(async (context, next) =>
     {
         context.Response.Headers.ContentType = "text/plain; charset=utf-8";
         await context.Response.WriteAsync("Браузер не поддерживается. Используйте Edg!");
-        
     }
 });
 

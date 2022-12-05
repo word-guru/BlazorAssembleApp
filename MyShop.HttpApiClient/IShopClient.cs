@@ -17,6 +17,7 @@ public interface IShopClient
     Task ClearCart();
    // Task RegisterAccount(Account user);
     Task RegisterAccount(RegisterRequest user);
+    Task<Account> GetLogIn(LogInRequest user);
     Task Authorization(LogInRequest user);
 
 }

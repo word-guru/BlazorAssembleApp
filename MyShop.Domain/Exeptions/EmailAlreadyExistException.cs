@@ -1,4 +1,4 @@
-﻿namespace MyShop.Domain.Exceptions;
+﻿namespace MyShop.Domain.Exeptions;
 
 [Serializable]
 public class EmailAlreadyExistException : Exception

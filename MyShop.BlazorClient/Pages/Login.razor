@@ -55,7 +55,7 @@
 
     private async Task LoginUser()
     {
-        await Client.Authorization(_model);
+        await Client.GetLogIn(_model);
         //NavigationManager.NavigateTo("/catalog");
         _auth = true;
     }

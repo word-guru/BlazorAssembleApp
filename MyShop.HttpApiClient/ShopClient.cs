@@ -130,10 +130,15 @@ public class ShopClient : IShopClient
         var response = await _httpClient.PostAsJsonAsync(uri, user);
         response.EnsureSuccessStatusCode();
     }
-    
+
+    public Task<Account> GetLogIn(LogInRequest user)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task Authorization(LogInRequest user)
     {
-        var uri = $"{_host}/account/login";
+        var uri = $"{_host}/account/authorization";
         var response = await _httpClient.PostAsJsonAsync(uri, user);
 
         response.EnsureSuccessStatusCode();

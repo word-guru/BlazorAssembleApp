@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using MyShop.Domain.Exceptions;
+using MyShop.Domain.Exeptions;
 using MyShop.Domain.Repositories.Interface;
+using MyShop.Domain.Services.Interfaces;
 using MyShop.Models;
 
 namespace MyShop.Domain.Services;
@@ -9,11 +10,16 @@ public class AccountServices : IAccountServices
 {
     private readonly IAccountRepository _accountRepository;
     private readonly IPasswordHasher<Account> _hasher;
+    private readonly ITokenService _tokenService;
 
-    public AccountServices(IAccountRepository accountRepository, IPasswordHasher<Account> hasher)
+    public AccountServices(IAccountRepository accountRepository,
+        IPasswordHasher<Account> hasher,
+        ITokenService tokenService
+    )
     {
         _accountRepository = accountRepository ?? throw new ArgumentNullException(nameof(accountRepository));
         _hasher = hasher ?? throw new ArgumentNullException(nameof(hasher)); //!
+        _tokenService = tokenService;
     }
 
     // [HttpPost("register")]
@@ -42,9 +48,8 @@ public class AccountServices : IAccountServices
         return account;
     }
 
-    public async Task<(Account account,string token)> LogIn(string email, string password)
+    public async Task<(Account account, string token)> LogIn(string email, string password)
     {
-        
         Account? account = await _accountRepository.FindByEmail(email);
         if (account is null)
         {
@@ -58,9 +63,8 @@ public class AccountServices : IAccountServices
             throw new IncorrectPasswordException();
         }
 
-        string token = _tokenService.Generate(account);
+        string token = _tokenService.GenerateToken(account);
 
-        return (account,token);
+        return (account, token);
     }
 }
-
