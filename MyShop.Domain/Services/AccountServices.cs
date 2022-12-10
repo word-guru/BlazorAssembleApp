@@ -10,16 +10,16 @@ namespace MyShop.Domain.Services;
 public class AccountServices : IAccountServices
 {
     private readonly IAccountRepository _accountRepository;
-    private readonly IPasswordHasher<Account> _hasher;
+    private readonly IPasswordHasherService _passwordHasherService;
     private readonly ITokenService _tokenService;
 
     public AccountServices(IAccountRepository accountRepository,
-        IPasswordHasher<Account> hasher,
+        IPasswordHasherService passwordHasherService,
         ITokenService tokenService
     )
     {
         _accountRepository = accountRepository ?? throw new ArgumentNullException(nameof(accountRepository));
-        _hasher = hasher ?? throw new ArgumentNullException(nameof(hasher)); //!
+        _passwordHasherService = passwordHasherService ?? throw new ArgumentNullException(nameof(passwordHasherService)); //!
         _tokenService = tokenService;
     }
 
@@ -42,7 +42,7 @@ public class AccountServices : IAccountServices
             throw new EmailAlreadyExistException();
         }
 
-        string hashedPassword = _hasher.HashPassword(account, password);
+        string hashedPassword = _passwordHasherService.HashPassword(password);
         account.Password = hashedPassword;
 
         await _accountRepository.Add(account);
@@ -57,15 +57,8 @@ public class AccountServices : IAccountServices
             throw new EmailUnregisteredException();
         }
 
-        var result = _hasher.VerifyHashedPassword(account, account.Password, password);
-
-        if (result == PasswordVerificationResult.Failed)
-        {
-            throw new IncorrectPasswordException();
-        }
-
+        var result = _passwordHasherService.VerifyPassword(account.Password, password);
         string token = _tokenService.GenerateToken(account);
-
         return (account, token);
     }
 }

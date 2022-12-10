@@ -96,7 +96,8 @@ builder.Services.AddScoped<ITokenService, JwtTokenService>();
 
 builder.Services.Configure<PasswordHasherOptions>(
     opt => opt.IterationCount = 100_000);
-builder.Services.AddSingleton<IPasswordHasher<Account>, PasswordHasher<Account>>();
+//builder.Services.AddSingleton<IPasswordHasher<Account>, PasswordHasher<Account>>();
+builder.Services.AddSingleton<IPasswordHasherService, Pbkdf2PasswordHasher>();
 
 var app = builder.Build();
 
