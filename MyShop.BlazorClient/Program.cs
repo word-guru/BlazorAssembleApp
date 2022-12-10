@@ -6,7 +6,6 @@ using MyShop.Server.Repository.BlazorClient.Data.Interface;
 using Blazored.Toast;
 using FluentValidation;
 using MyShop.BlazorClient;
-using MyShop.Domain.Validators;
 using MyShop.HttpApiClient;
 using MyShop.HttpModels;
 
