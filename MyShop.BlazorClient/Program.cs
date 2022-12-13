@@ -25,12 +25,12 @@ builder.Services.AddBlazoredToast();
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
 });*/
 
-/*builder.Services.AddValidatorsFromAssemblyContaining<UserValidator>();
+/*builder.Services.AddValidatorsFromAssemblyContaining<UserRegisterValidator>();
  builder.Services.AddFluentValidationAutoValidation(config => 
  {
      config.DisableDataAnnotationsValidation = true;
  });
-builder.Services.AddScoped<IValidator<User>UserValidator>()
+builder.Services.AddScoped<IValidator<User>UserRegisterValidator>()
 builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<User>());*/
 
 builder.Services.AddBlazoredToast(); 
