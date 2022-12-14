@@ -41,7 +41,7 @@ public class AccountServices : IAccountServices
         }
 
         string hashedPassword = _passwordHasherService.HashPassword(password);
-        account.Password = hashedPassword;
+        account.PasswordHash = hashedPassword;
 
         await _accountRepository.Add(account);
         return account;
@@ -55,7 +55,7 @@ public class AccountServices : IAccountServices
             throw new EmailUnregisteredException();
         }
 
-        var result = _passwordHasherService.VerifyPassword(account.Password, password);
+        var result = _passwordHasherService.VerifyPassword(account.PasswordHash, password);
         string token = _tokenService.GenerateToken(account);
         return (account, token);
     }

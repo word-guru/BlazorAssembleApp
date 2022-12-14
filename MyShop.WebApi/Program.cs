@@ -5,27 +5,22 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MyShop.Data.Ef;
 using MyShop.Data.Ef.Repositories;
-using MyShop.Domain.Entites;
 using MyShop.Domain.Repositories.Interface;
 using MyShop.Domain.Services;
 using MyShop.Domain.Services.Interfaces;
-using MyShop.HttpModels;
 using MyShop.WebApi.Configurations;
 using MyShop.WebApi.Sevices;
 
 var builder = WebApplication.CreateBuilder(args);
 var dbPath = "myapp.db";
 
+builder.Services.AddDbContext<AppDbContext>(
+    options => options.UseSqlite($"Data Source={dbPath}"));
+
 JwtConfig jwtConfig = builder.Configuration
     .GetSection("JwtConfig")
     .Get<JwtConfig>();
 builder.Services.AddSingleton(jwtConfig);
-
-
-// AddProduct services to the container.
-
-builder.Services.AddDbContext<AppDbContext>(
-    options => options.UseSqlite($"Data Source={dbPath}"));
 
 builder.Services.AddSwaggerGen(c =>
 {

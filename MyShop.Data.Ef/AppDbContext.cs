@@ -10,8 +10,6 @@ public class AppDbContext : DbContext
     public DbSet<Cart> Carts => Set<Cart>();
     public DbSet<Category> Categories => Set<Category>();
     public DbSet<Account> Accounts => Set<Account>();
-    
-    public Task Product { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options)
